@@ -5,27 +5,16 @@ ja.code = 'ja';
 ja.data = {
 
   /* Mnemonic Additions */
-  MNEM_1:               'Please select the address you would like to interact with.',
-  MNEM_2:               'Your single HD mnemonic phrase can access a number of wallets / addresses. Please select the address you would like to interact with at this time.',
-  MNEM_more:            'More Addresses',
-  MNEM_prev:            'Previous Addresses',
-  x_Mnemonic:           'Mnemonic Phrase (MetaMask / Jaxx / Ledger)',
-  ADD_Radio_5:          'Paste/Type Your Mnemonic',
-  SEND_custom:          'Custom Token',
-  ERROR_21:             ' is not a valid ERC-20 token. If other tokens are loading, please remove this token and try again.',
-  TOKEN_show:           'Show All Tokens',
-  TOKEN_hide:           'Hide Tokens',
-
-  /* Geth Error Messages */
-  GETH_InvalidSender:      '送出元が無効です',
-  GETH_Nonce:              'Nonce が足りません',
-  GETH_Cheap:              'ガス価格が低すぎます',
-  GETH_Balance:            '残高不足',
-  GETH_NonExistentAccount: 'アカウントが存在しない、あるいはその残高不足です',
-  GETH_InsufficientFunds:  'ガス*価格+数量に足りません',
-  GETH_IntrinsicGas:       '基本のガス不足です',
-  GETH_GasLimit:           'ブロックガスリミットを越えています',
-  GETH_NegativeValue:      '負の値です',
+  MNEM_1:               '操作したいアドレスを選択してください。',
+  MNEM_2:               'ＨＤニーモニックの一つの文節で、複数のウォレットやアドレスが操作可能です。操作したいアドレスを選択してください。',
+  MNEM_more:            'アドレスをもっと',
+  MNEM_prev:            '前のアドレス',
+  x_Mnemonic:           'ニーモニックフレーズ (MetaMask / Jaxx / Ledger)',
+  ADD_Radio_5:          'ニーモニックを上書き/タイプ',
+  SEND_custom:          'カスタムトークン',
+  ERROR_21:             '有効なERC-20トークンではありません',
+  TOKEN_show:           '全てのトークンを表示',
+  TOKEN_hide:           'トークンを隠す',
 
   /* Navigation*/
   NAV_YourWallets:      '自分のウォレット',
@@ -76,9 +65,9 @@ ja.data = {
   /* Footer */
   FOOTER_1:             'イサリアムウォレットの作成とトランザクション実行のためのオープンソース、javascript、 クライアントサイドツール。',
   FOOTER_1b:            '制作',
-  FOOTER_2:             ‘投げ銭に感謝致します！:’,
+  FOOTER_2:             '投げ銭に感謝致します:',
   FOOTER_3:             'クライアントサイドウォレット制作',
-  FOOTER_4:               '免責事項',
+  FOOTER_4:             '免責事項',
 
   /* Sidebar */
   sidebar_AccountInfo:  'アカウント情報: ',
@@ -133,7 +122,6 @@ ja.data = {
   SEND_addr:             '宛先アドレス： ',
   SEND_amount:           '送出数量： ',
   SEND_amount_short:     '数量',
-  SEND_custom:           'カスタム',
   SEND_gas:              'ガス',
   SEND_TransferTotal:    '残高をすべて送出する',
   SEND_generate:         'トランザクションを生成',
@@ -147,7 +135,7 @@ ja.data = {
   SENDModal_Content_3:   'に対し完了。本当に送出してよろしいですか？',
   SENDModal_Content_4:   'ノート：最も起こりやすいエラーの原因は、送出のためのガス不足で、その場合には、ETHを追加する必要があります。ガスはETHで支払われます。',
   SENDModal_No:          'いいえ、中断します。',
-  SENDModal_Yes:         'はい、確かです。処理を実行します。',
+  SENDModal_Yes:         'はい、処理を実行してください。',
 
   /* Tokens */
   TOKEN_Addr:            'アドレス：',
@@ -160,7 +148,7 @@ ja.data = {
   TRANS_standard:        'ETH(標準トランザクション)',
   TRANS_eth:             'ETHのみ',
   TRANS_etc:             'ETCのみ',
-  TRANS_advanced:        '+Advanced: ガスあるいはデータを追加してください ',
+  TRANS_advanced:        '+Advanced: データを追加してください ',
   TRANS_data:            ' データ： ',
   TRANS_gas:             ' ガス： ',
   TRANS_sendInfo:        '21000ガスを使用する標準トランザクションは、0.000441 ETHを消費します。迅速な処理を行うために、若干最小量よりも多めの0.000000021 ETHのガスを使用します。当サービスでは、トランザクション料金は徴収いたしません。',
@@ -174,7 +162,7 @@ ja.data = {
   TRANSModal_Content_4:  '**Coinbase & ShapeShift: ** スタンダードトランザクションのみで送出します。どちらかのみのコントラクトで送出する場合には、サポートスタッフに連絡して、手動で残高に追加したり払い戻しをする必要があります。[Shapeshiftの「スプリット」ツールも使用可能です。(https://split.shapeshift.io/)',
   TRANSModal_Content_5:  '**Kraken & Poloniex:** No known issues. Use whatever.',
   TRANSModal_Yes:        '理解しました。',
-  TRANSModal_No:         '理解できません。ヘルプが必要です。',
+  TRANSModal_No:         '理解できません。教えてください。',
 
   /* Offline Transaction */
   OFFLINE_Title:         'オフライントランザクションを作成し送出',
@@ -204,11 +192,12 @@ ja.data = {
   DAO_TitleETH:           'ETHでDAOを払い出し',
   DAO_TitleETC:           'ETCでDAOを払い出し',
   DAO_ETC_Label_1:        'どのアドレスにETCを送りますか？',
-  DAO_ETC_Label_2:        'ホワイトハックグループは日夜ETCを取り戻すべために働いています。希望すれば、払い戻しの何パーセントかを感謝をこめて贈る事ができます。',
+  DAO_ETC_Label_2:        'ホワイトハックグループは日夜ETCを取り戻すために働いています。ご希望があれば、払い戻しの何パーセントかを感謝を込めて贈る事ができます。',
   DAO_Desc:               'このタブ上で、DAOトークンから、ETH **& ETC**の払い戻してください。DAOトークンの送るためには、トークン送出タブを選んでください。',
   DAO_Inst:               '赤いボタンをクリックしてください。簡単です。',
   DAO_Warning:            '「ガス残高不足」エラーの時は、アカウントにガスを供給するためにに少量のEtherが必要です。このアカウントに0.01 ETHを追加して、再度操作してください。',
   DAOModal_Title:         '確認中/...',
+  // full sentence is "You are about to withdraw 100 DAO tokens to address 0x12344 for 1 ETH.
   DAOModal_1:             '払い出しを進めます',
   DAOModal_2:             'DAOトークンを',
   DAOModal_3:             'に対し', // “の代わりに”
@@ -280,6 +269,17 @@ ja.data = {
   SUCCESS_4:            'ウォレットが追加されました：',
   SUCCESS_5:            '投票が完了しました。The DAO への積極的な参加に感謝いたします。',
   SUCCESS_6:            '選択されました： ',
+
+  /* Geth Error Messages */
+  GETH_InvalidSender:      '送出元が無効です',
+  GETH_Nonce:              'Nonce が足りません',
+  GETH_Cheap:              'ガス価格が低すぎます',
+  GETH_Balance:            '残高不足',
+  GETH_NonExistentAccount: 'アカウントが存在しない、あるいはその残高不足です',
+  GETH_InsufficientFunds:  'ガス*価格+数量に足りません',
+  GETH_IntrinsicGas:       '基本のガス不足です',
+  GETH_GasLimit:           'ブロックガスリミットを越えています',
+  GETH_NegativeValue:      '負の値です',
 
   /* Parity Error Messages */
   PARITY_AlreadyImported:       "Transaction with the same hash was already imported.",
