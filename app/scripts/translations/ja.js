@@ -282,11 +282,11 @@ ja.data = {
   GETH_NegativeValue:      '負の値です',
 
   /* Parity Error Messages */
-  PARITY_AlreadyImported:       "Transaction with the same hash was already imported.",
-  PARITY_Old:                   "Transaction nonce is too low. Try incrementing the nonce.",
-  PARITY_TooCheapToReplace:     "Transaction fee is too low. There is another transaction with same nonce in the queue. Try increasing the fee or incrementing the nonce.",
-  PARITY_LimitReached:          "There are too many transactions in the queue. Your transaction was dropped due to limit. Try increasing the fee.",
-  PARITY_InsufficientGasPrice:  "Transaction fee is too low. It does not satisfy your node's minimal fee (minimal: {}, got: {}). Try increasing the fee.",
+  PARITY_AlreadyImported:       “同じハッシュのトランザクションがすでにインポートされています。",
+  PARITY_Old:                   “Transaction nonceが小さすぎます。増やしてみてください。",
+  PARITY_TooCheapToReplace:     “Transaction fee が小さすぎます。同じ nonce のトランザクションが別のキューにあります。fee または nonce を増やしてみてください。",
+  PARITY_LimitReached:          “キューにあるトランザクションの数が多すぎます。上限を超えたため、対象のトランザクションは除外されています。その fee を増やしてみてください。”,
+  PARITY_InsufficientGasPrice:  "Transaction fee が小さすぎます。 ノードの最小 fee を満たしていません。 (minimal: {}, got: {}). fee を増やしてください。”,
   PARITY_InsufficientBalance:   "Insufficient funds. Account you try to send transaction from does not have enough funds. Required {} and got: {}.",
   PARITY_GasLimitExceeded:      "Transaction cost exceeds current gas limit. Limit: {}, got: {}. Try decreasing supplied gas.",
   PARITY_InvalidGasLimit:       "Supplied gas is beyond limit.",
