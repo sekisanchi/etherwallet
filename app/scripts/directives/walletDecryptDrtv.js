@@ -6,16 +6,19 @@ var walletDecryptDrtv = function() {
      <div class="col-md-4 col-sm-6">\n \
       <h4 translate="decrypt_Title"> Select the format of your private key: </h4>\n \
       <div class="radio">\n \
-        <label>\n \
-          <input type="radio" ng-model="walletType" value="fileupload"/><span translate="x_Keystore2">Keystore / JSON File</span></label>\n \
+        <label><input type="radio" ng-model="walletType" value="fileupload"/><span translate="x_Keystore2">Keystore / JSON File</span></label>\n \
       </div>\n \
       <div class="radio">\n \
-        <label>\n \
-          <input type="radio" ng-model="walletType" value="pasteprivkey"/><span translate="x_PrivKey2">Private Key</span></label>\n \
+        <label><input type="radio" ng-model="walletType" value="pasteprivkey"/><span translate="x_PrivKey2">Private Key</span></label>\n \
       </div>\n \
       <div class="radio">\n \
-        <label>\n \
-          <input type="radio" ng-model="walletType" value="pastemnemonic"/><span translate="x_Mnemonic">Mnemonic Phrase</span></label>\n \
+        <label><input type="radio" ng-model="walletType" value="pastemnemonic"/><span translate="x_Mnemonic">Mnemonic Phrase</span></label>\n \
+      </div>\n \
+      <div class="radio">\n \
+        <label><input type="radio" ng-model="walletType" value="ledger"/><span translate="x_Ledger">Ledger Nano S</span></label>\n \
+      </div>\n \
+      <div class="radio" ng-hide="globalService.currentTab!==globalService.tabs.viewWalletInfo.id" >\n \
+        <label><input type="radio" ng-model="walletType" value="addressOnly"/><span>View with Address Only</span></label>\n \
       </div>\n \
     </div>\n \
     <div class="col-md-4 col-sm-6">\n \
@@ -53,12 +56,34 @@ var walletDecryptDrtv = function() {
         </div>\n \
       </div>\n \
       <!-- /if selected type mnemonic-->\n \
+      <!-- if selected type ledger-->\n \
+      <div id="selectedTypeLedger" ng-if="walletType==\'ledger\'">\n \
+        <ol>\n \
+          <li translate="ADD_Ledger_0a" class="text-danger" ng-hide="isSSL"> Re-open MyEtherWallet on a secure (SSL) connection </li>\n \
+          <li translate="ADD_Ledger_0b" class="text-danger" ng-hide="isChrome"> Re-open MyEtherWallet using Google Chrome or Opera </li>\n \
+          <li translate="ADD_Ledger_1">Connect your Ledger Nano S</li>\n \
+          <li translate="ADD_Ledger_2">Open the Ethereum application (or a contract application)</li>\n \
+          <li translate="ADD_Ledger_3">Verify that Browser Support is enabled in Settings</li>\n \
+          <li translate="ADD_Ledger_4">If no Browser Support is found in settings, verify that you have Firmware \>1.2</li>\n \
+        </ol>\n \
+      </div>\n \
+      <!-- /if selected type ledger-->\n \
+      <!-- if selected addressOnly-->\n \
+      <div id="selectedTypeKey" ng-if="walletType==\'addressOnly\'">\n \
+        <h4 translate="x_Address"> Your Address </h4>\n \
+        <div class="form-group">\n \
+          <textarea rows="4" class="form-control" placeholder="{{ \'x_Address\' | translate }}" ng-model="$parent.$parent.addressOnly" ng-class="Validator.isValidAddress($parent.$parent.addressOnly) ? \'is-valid\' : \'is-invalid\'" ng-change="onAddressChange()"></textarea>\n \
+        </div>\n \
+      </div>\n \
+      <!-- /if selected addressOnly-->\n \
     </div>\n \
-    <div class="col-md-4 col-sm-6"   ng-show="showFDecrypt||showPDecrypt||showMDecrypt">\n \
+    <div class="col-md-4 col-sm-6"   ng-show="showFDecrypt||showPDecrypt||showMDecrypt||walletType==\'ledger\'||showAOnly">\n \
       <h4 id="uploadbtntxt-wallet" ng-show="showFDecrypt" translate="ADD_Label_6"> Access Your Wallet:</h4>\n \
       <h4 id="uploadbtntxt-privkey" ng-show="showPDecrypt" translate="ADD_Label_6"> Access Your Wallet: </h4>\n \
       <h4 id="uploadbtntxt-mnemonic" ng-show="showMDecrypt" translate="ADD_Label_6"> Access Your Wallet: </h4>\n \
       <div class="form-group"><a class="btn btn-primary btn-block btnAction" ng-show="showFDecrypt||showPDecrypt||showMDecrypt" ng-click="decryptWallet()" translate="ADD_Label_6_short">UNLOCK</a></div>\n \
+      <div class="form-group"><a class="btn btn-primary btn-block btnAction" ng-show="showAOnly" ng-click="decryptAddressOnly()" translate="ADD_Label_6_short">UNLOCK</a></div>\n \
+      <div class="form-group"><a class="btn btn-primary btn-block btnAction" ng-show="walletType==\'ledger\'" ng-click="scanLedger()" translate="ADD_Ledger_scan">SCAN</a></div>\n \
       <div ng-bind-html="decryptStatus"></div>\n \
     </div>\n \
     <div class="modal fade" tabindex="-1" role="dialog" id="mnemonicModel">\n \

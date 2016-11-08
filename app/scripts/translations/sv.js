@@ -4,17 +4,30 @@ var sv = function() {}
 sv.code = 'sv';
 sv.data = {
 
+  ERROR_22:             'Could not estimate gas. There are not enough funds in the account, or the receiving contract address would throw an error. Feel free to manually set the gas and proceed. The error message upon sending may be more informative.',
+
   /* Mnemonic Additions */
   MNEM_1:               'Please select the address you would like to interact with.',
   MNEM_2:               'Your single HD mnemonic phrase can access a number of wallets / addresses. Please select the address you would like to interact with at this time.',
   MNEM_more:            'More Addresses',
   MNEM_prev:            'Previous Addresses',
-  x_Mnemonic:           'Mnemonic Phrase (MetaMask / Jaxx / Ledger)',
+  x_Mnemonic:           'Mnemonic Phrase (MetaMask / Jaxx)',
   ADD_Radio_5:          'Paste/Type Your Mnemonic',
-  SEND_custom:          'Custom Token',
+  SEND_custom:          'Add Custom Token',
   ERROR_21:             ' is not a valid ERC-20 token. If other tokens are loading, please remove this token and try again.',
   TOKEN_show:           'Show All Tokens',
   TOKEN_hide:           'Hide Tokens',
+  WARN_Send_Link:       'You arrived via a link that has the address, amount, gas or data fields filled in for you. You can change any information before sending. Unlock your wallet to get started.',
+
+  /* Hardware wallets */
+  x_Ledger:             'Ledger Nano S',
+  ADD_Ledger_1:         'Connect your Ledger Nano S',
+  ADD_Ledger_2:         'Open the Ethereum application (or a contract application)',
+  ADD_Ledger_3:         'Verify that Browser Support is enabled in Settings',
+  ADD_Ledger_4:         'If no Browser Support is found in settings, verify that you have [Firmware >1.2](https://www.ledgerwallet.com/apps/manager)',
+  ADD_Ledger_0a:        'Re-open MyEtherWallet on a secure (SSL) connection',
+  ADD_Ledger_0b:        'Re-open MyEtherWallet using [Chrome](https://www.google.com/chrome/browser/desktop/) or [Opera](https://www.opera.com/)',
+  ADD_Ledger_scan:      'Connect to Ledger Nano S',
 
   NAV_DeployContract:   'Deploy Contract',
 
@@ -23,7 +36,7 @@ sv.data = {
   NAV_AddWallet:        'Lägg till Plånbok',
   NAV_GenerateWallet:   'Generera Plånbok',
   NAV_BulkGenerate:     'Mass Generera',
-  NAV_SendEther:        'Skicka Ether',
+  NAV_SendEther:        'Skicka Ether och Tokens',
   NAV_SendTokens:       'Skicka Token', /*Översätt token?*/
   NAV_Offline:          'Skicka Offline',
   NAV_WithdrawDAO:      'Växla DAO',
@@ -145,7 +158,7 @@ sv.data = {
   TOKEN_Dec:             'Decimaler: ',
 
   /* Send Transaction */
-  TRANS_desc:            'If you want to send Tokens, please use the "Send Token" page instead.',
+  TRANS_desc:            '',
   TRANS_warning:         'If you are using the "Only ETH" or "Only ETC" Functions you are sending via a contract. Some services have issues accepting these transactions. Read more.',
   TRANS_standard:        'ETH (Standard Transaction)',
   TRANS_eth:             'Only ETH',

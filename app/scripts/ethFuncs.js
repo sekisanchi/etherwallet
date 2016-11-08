@@ -63,53 +63,44 @@ ethFuncs.getDataObj = function(to, func, arrVals) {
 		data: func + val
 	};
 }
-ethFuncs.vmTraceEstimate = function(data) {
-    if (!data.data.vmTrace || !data.data.vmTrace.ops.length) return -1;
-	var ops = data.data.vmTrace.ops;
-	var gasLimit = 50000000;
-	var smallest = gasLimit;
-	function recurSmallest(ops) {
-		for (var i = 0; i < ops.length; i++) {
-			if (!ops[i].sub && ops[i].ex.used < smallest && ops[i].ex.used > 100000) smallest = ops[i].ex.used;
-			else if (ops[i].sub) recurSmallest(ops[i].sub.ops);
-		}
-	}
-	recurSmallest(ops);
-	gasLimit -= smallest;
-	return gasLimit;
-}
-ethFuncs.traceEstimate = function(data) {
-	var calls = data.data.trace;
-	var gasAssigned = new BigNumber(0);
-	var maxGas = new BigNumber(50000000);
-	for (var i = 0; i < calls.length; i++) {
-		if (calls[i].result.failedCall !== undefined || calls[i].result.failedCreate !== undefined) {
-			gasAssigned = new BigNumber(-1);
-			break;
-		}
-		var cType = calls[i].action.create !== undefined ? 'create' : 'call';
-		var gas = new BigNumber(calls[i].action[cType].gas).sub(new BigNumber(calls[i].result[cType].gasUsed));
-		if (maxGas.sub(gas).gt(gasAssigned) && gas.gt(100000)) gasAssigned = maxGas.sub(gas);
-	}
-	return gasAssigned.toNumber();
-}
 ethFuncs.estimateGas = function(dataObj, isClassic, callback) {
+    var gasLimit = 2000000;
 	dataObj.gasPrice = '0x01';
+    dataObj.gas = '0x' + new BigNumber(gasLimit).toString(16);
 	ajaxReq.getTraceCall(dataObj, isClassic, function(data) {
 		if (data.error) {
 			callback(data);
 			return;
 		}
-        var traceEst = ethFuncs.traceEstimate(data);
-        var vmTraceEst = ethFuncs.vmTraceEstimate(data);
-        var estVal = -1;
-        if(traceEst!=-1)
-            estVal = traceEst > vmTraceEst ? traceEst:vmTraceEst;
-            
+        function recurCheckBalance(ops){
+            var startVal = 24088+ops[0].cost;
+            for(var i=0;i<ops.length-1;i++){
+                var remainder = startVal-(gasLimit-ops[i].ex.used);
+                if (ops[i+1].sub  && ops[i+1].sub.ops.length && (gasLimit-ops[i+1].cost)> remainder) startVal+= (gasLimit-ops[i+1].cost)-startVal;
+                else if (ops[i+1].cost > remainder) startVal+= ops[i+1].cost-remainder;
+            }
+            if(!dataObj.to) startVal+=37000; //add 37000 for contract creation
+            startVal = startVal==gasLimit ? -1: startVal;
+            return startVal;
+        }
+        if(data.data.vmTrace && data.data.vmTrace.ops.length) {
+            var result = data.data.vmTrace.ops;
+            var estGas = recurCheckBalance(result);
+            estGas =  estGas < 0 ? -1 : estGas;
+        }
+        else{
+            var stateDiff = data.data.stateDiff;
+            stateDiff = stateDiff[dataObj.from.toLowerCase()]['balance']['*'];
+            if(stateDiff)
+                var estGas = new BigNumber(stateDiff['from']).sub(new BigNumber(stateDiff['to'])).sub(new BigNumber(dataObj.value));
+            else 
+                var estGas = new BigNumber(-1);
+            if(estGas.lt(0)||estGas.eq(gasLimit)) estGas = -1;
+        }
 		callback({
 			"error": false,
 			"msg": "",
-			"data": estVal.toString()
+			"data": estGas.toString()
 		});
 	});
 }

@@ -4,24 +4,25 @@ var vi = function() {}
 vi.code = 'vi';
 vi.data = {
 
-  /* Mnemonic Additions */
-  MNEM_1:               'Xin vui lòng, Chọn địa chỉ mà bạn muốn tương tác.',
-  MNEM_2:               'Cụm từ dễ nhớ đó có thể truy nhập vào số địa chỉ Ví của bạn. Vui lòng chọn địa chỉ mà bạn muốn tương tác tại thời điểm này.',
-  MNEM_more:            'Nhiều địa chỉ',
-  MNEM_prev:            'Địa chỉ trước đó',
-  x_Mnemonic:           'Cụm từ dễ nhớ (MetaMask / Jaxx / Ledger)',
-  ADD_Radio_5:          'Dán/Điền ký tự dễ nhớ của bạn',
-  SEND_custom:          'Token được yêu cầu!',
-  ERROR_21:             'Không tồn tại trên hệ thống ERC-20 token. Nếu bạn phải chờ lâu. Xin vui lòng thử lại lần nữa!.',
-  TOKEN_show:           'Hiển thị tất cả các loại Tokens',
-  TOKEN_hide:           'Ẩn Tokens',
+  WARN_Send_Link:       'You arrived via a link that has the address, amount, gas or data fields filled in for you. You can change any information before sending. Unlock your wallet to get started.',
+  ERROR_22:             'Could not estimate gas. There are not enough funds in the account, or the receiving contract address would throw an error. Feel free to manually set the gas and proceed. The error message upon sending may be more informative.',
+
+  /* Hardware wallets */
+  x_Ledger:             'Ledger Nano S',
+  ADD_Ledger_1:         'Kết Nối Với Ledger Nano S Của Bạn',
+  ADD_Ledger_2:         'Mở Lên Ứng Dụng Của Ethereum (Hoặc một ứng dụng của Hợp Đồng)',
+  ADD_Ledger_3:         'Xác nhận lại phần Hổ Trợ dành cho Trình Duyệt đã được kích hoạt trong mục Cài Đặt',
+  ADD_Ledger_4:         'Nếu mục Hổ Trợ dành cho Trình duyệt không tìm thấy trong mục Cài Đặt, Xác nhận lại bạn đã có [Firmware >1.2](https://www.ledgerwallet.com/apps/manager) hay chưa',
+  ADD_Ledger_0a:        'Hảy mở lại trang MyEtherWallet trên một kết nối có tính bảo mật (SSL)',
+  ADD_Ledger_0b:        'Sử dụng [Chrome](https://www.google.com/chrome/browser/desktop/) hoặc [Opera](https://www.opera.com/) Để mở lại trang MyEtherWallet',
+  ADD_Ledger_scan:      'Kết nối với Ledger Nano S',
 
   /* Navigation*/
   NAV_YourWallets:      'Ví Của Bạn',
   NAV_AddWallet:        'Thêm Ví',
   NAV_GenerateWallet:   'Tạo Ví',
   NAV_BulkGenerate:     'Tạo Nhiều Ví',
-  NAV_SendEther:        'Gửi Ether',
+  NAV_SendEther:        'Gửi Ether và Tokens',
   NAV_SendTokens:       'Gửi Token',
   NAV_Offline:          'Giao Dịch Offline',
   NAV_WithdrawDAO:      'Thu Hồi DAO Token',
@@ -45,6 +46,7 @@ vi.data = {
   x_Keystore:           'Định Dạng Keystore (UTC / JSON) (Đã mã hoá. Định Dạng này sử dụng cho Mist)',
   x_Keystore2:          'Định Dạng Keystore (UTC / JSON)',
   x_KeystoreDesc:       'Định dạng Keystore là tập một tin chứa dữ liệu ví đã được mã hoá của Private Key và sử dụng cho Mist. Do đó bạn có thể dễ dàng bỏ nó vào bên trong Mist và tiếp tục sử dụng ví của bạn. Đây là một tập tin được đề xuất nhằm sao lưu dữ liệu ví cá nhân.',
+  x_Mnemonic:           'Cụm từ dễ nhớ (MetaMask / Jaxx)',
   x_Password:           'Mật Khẩu',
   x_Print:              'Tạo Ví Giấy',
   x_PrintDesc:          'Mẹo: kích chuột trái vào nút "In Ví" sau đó chọn "Save this as a PDF" đễ lưu nó thành định dạng PDF trên máy tính của bạn nếu bạn không sở hữu máy in cá nhân!',
@@ -94,6 +96,7 @@ vi.data = {
   ADD_Radio_2_short:      'CHỌN TẬP TIN VÍ...',
   ADD_Radio_3:            'Dán/Gõ Private Key Ví Của Bạn ',
   ADD_Radio_4:            'Thêm Tài Khoản đễ Theo Dõi',
+  ADD_Radio_5:          'Dán/Điền ký tự dễ nhớ của bạn',
   ADD_Label_2:            'Tạo Tên Gọi:',
   ADD_Label_3:            'Ví của bạn sẽ được giải mã. Xin vui lòng điền mật khẩu: ',
   ADD_Label_4:            'Thêm Tài Khoản đễ Theo Dõi',
@@ -122,7 +125,7 @@ vi.data = {
   SEND_addr:             'Địa Chỉ Đến: ',
   SEND_amount:           'Số Lượng Cần Gửi: ',
   SEND_amount_short:     'Số Lượng',
-  SEND_custom:           'Tuỳ Chỉnh',
+  SEND_custom:          'Token được yêu cầu!',
   SEND_gas:              'Gas',
   SEND_TransferTotal:    'Gửi Hết Số Dư Hiện Có',
   SEND_generate:         'Tạo Giao Dịch',
@@ -142,6 +145,8 @@ vi.data = {
   TOKEN_Addr:            'Địa Chỉ: ',
   TOKEN_Symbol:          'Ký Hiệu Token: ',
   TOKEN_Dec:             'Phân Số Thập Phân: ',
+  TOKEN_show:           'Hiển thị tất cả các loại Tokens',
+  TOKEN_hide:           'Ẩn Tokens',
 
   /* Send Transaction */
   TRANS_desc:            'Nếu bạn muốn gửi Token, xin vui lòng sử dụng danh mục "Gửi Token".',
@@ -239,6 +244,12 @@ vi.data = {
   VIEWWALLET_Subtitle_Short: 'Việc này cho phép bạn tải về các phiên bản khác nhau của Private Key và in lại ví giấy của bạn. ',
   VIEWWALLET_SuccessMsg:     'Đã Thành Công! Đây là thông tin chi tiết về Ví của bạn.',
 
+  /* Mnemonic Additions */
+  MNEM_1:               'Xin vui lòng, Chọn địa chỉ mà bạn muốn tương tác.',
+  MNEM_2:               'Cụm từ dễ nhớ đó có thể truy nhập vào số địa chỉ Ví của bạn. Vui lòng chọn địa chỉ mà bạn muốn tương tác tại thời điểm này.',
+  MNEM_more:            'Nhiều địa chỉ',
+  MNEM_prev:            'Địa chỉ trước đó',
+
   /* Chrome Extension */
   CX_error_1:           'Bạn không có bất kỳ ví nào được lưu lại. Chọn Nút ["Thêm Ví"](/cx-wallet.html#add-wallet) để thêm ví!',
   CX_quicksend:         'Gửi Nhanh', // if no appropriate translation, just use "Send"
@@ -259,11 +270,12 @@ vi.data = {
   ERROR_13:             'Chữ ký giao dịch không hợp lệ. ',
   ERROR_14:             'Tên gọi này đã được sữ dụng. ',
   ERROR_15:             'Không tìm thấy Ví. ',
-  ERROR_16:             'It doesnt look like a proposal with this ID exists yet or there is an error reading this proposal. ',
+  ERROR_16:             'Trông có vẻ như một proposal ới số ID này chưa kết thúc hoặc đang có một lỗi xảy ra để đọc được proposal này. ',
   ERROR_17:             'Đã có một ví với địa chỉ này đang tồn tại trong mục lưu trữ. Vui lòng kiễm tra trang ví của bạn. ',
   ERROR_18:             'Bạn cần có ít nhất 0.01 ether trong tài khoản để thanh toán chi phí gas. Hãy thêm một số ether và thực hiện lại. ',
   ERROR_19:             'Toàn bộ gas sẽ được sử dụng trong giao dịch này. Việc làm này có nghĩa là bạn đã bỏ phiếu cho đề xuất này hoặc kỳ hạn của cuộc tranh luận đã kết thúc.',
   ERROR_20:             'Biểu tượng không hợp lệ',
+  ERROR_21:             'Không tồn tại trên hệ thống ERC-20 token. Nếu bạn phải chờ lâu. Xin vui lòng thử lại lần nữa!.',
   SUCCESS_1:            'Địa Chỉ Hợp Lệ',
   SUCCESS_2:            'Ví đã được giải mã thành công',
   SUCCESS_3:            'Giao dịch đã gửi đi, TX ID:',
@@ -273,24 +285,24 @@ vi.data = {
 
    /* Geth Error Messages */
   GETH_InvalidSender:      'Sai người nhận',
-  GETH_Nonce:              'Nonce too low',
+  GETH_Nonce:              'Nonce quá thấp',
   GETH_Cheap:              'Gas quá thấp',
-  GETH_Balance:            'Insufficient balance',
-  GETH_NonExistentAccount: 'Tài khoản không tồn tại hoặc số dư quá thấp',
-  GETH_InsufficientFunds:  'Insufficient funds for gas * price + value',
-  GETH_IntrinsicGas:       'Intrinsic gas too low',
-  GETH_GasLimit:           'Exceeds block gas limit',
-  GETH_NegativeValue:      'Negative value',
+  GETH_Balance:            'Số dư tài khoản không đủ ',
+  GETH_NonExistentAccount: 'Tài khoản không tồn tại hoặc số dư không đủ',
+  GETH_InsufficientFunds:  'Số dư không đủ thanh toán cho gas * Giá + Giá trị',
+  GETH_IntrinsicGas:       'Số gas quá thấp',
+  GETH_GasLimit:           'Số gas vượt mức giới hạn đối với một Block',
+  GETH_NegativeValue:      'Cảnh báo xấu về lượng gas',
 
   /* Parity Error Messages */
-  PARITY_AlreadyImported:       "Transaction with the same hash was already imported.",
-  PARITY_Old:                   "Transaction nonce is too low. Try incrementing the nonce.",
-  PARITY_TooCheapToReplace:     "Transaction fee is too low. There is another transaction with same nonce in the queue. Try increasing the fee or incrementing the nonce.",
-  PARITY_LimitReached:          "There are too many transactions in the queue. Your transaction was dropped due to limit. Try increasing the fee.",
-  PARITY_InsufficientGasPrice:  "Transaction fee is too low. It does not satisfy your node's minimal fee (minimal: {}, got: {}). Try increasing the fee.",
-  PARITY_InsufficientBalance:   "Insufficient funds. Account you try to send transaction from does not have enough funds. Required {} and got: {}.",
-  PARITY_GasLimitExceeded:      "Transaction cost exceeds current gas limit. Limit: {}, got: {}. Try decreasing supplied gas.",
-  PARITY_InvalidGasLimit:       "Supplied gas is beyond limit.",
+  PARITY_AlreadyImported:       "Giao dịch có cùng đoạn hash đã được ghi nhận.",
+  PARITY_Old:                   "Nonce quá thấp để tạo một giao dịch, hãy thử lại bằng cách tăng số nonce.",
+  PARITY_TooCheapToReplace:     "Phí giao dịch quá thấp. Đang có một giao dịch khác có cùng số nonce đang bị gián đoạn. Hãy thử lại bằng cách tăng phí giao dịch.",
+  PARITY_LimitReached:          "Có quá nhiều giao dịch đang bị gián đoạn. Giao dịch của bạn sẽ bị ngắt nhằm đảm bảo mức giới hạn an toàn. Hãy thử lại bằng cách tăng phí giao dịch.",
+  PARITY_InsufficientGasPrice:  "Phí giao dịch quá thấp. Nó không đáp ứng được mức phí tối thiểu dành cho node của bạn (Tối thiểu: {}, bạn có: {}). Hãy thử lại bằng cách tăng phí giao dịch.",
+  PARITY_InsufficientBalance:   "Không đủ số dư. Bạn đang cố gắng gửi đi một giao dịch vs số dư bị thiếu. Số dư cần thiết {} và bạn có: {}.",
+  PARITY_GasLimitExceeded:      "Phí giao dịch đang vượt quá mức giới hạn gas hiện tại. Giới hạn: {}, bạn có: {}. Hãy thử lại bằng cách giảm bớt số gas.",
+  PARITY_InvalidGasLimit:       "Tổng số gas mà bạn sử dụng đang vượt mức giới hạn cho phép.",
 
   /* Tranlsation Info */
   translate_version:    '0.3',

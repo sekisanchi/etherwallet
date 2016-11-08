@@ -4,18 +4,14 @@ var nl = function() {}
 nl.code = 'nl';
 nl.data = {
 
-  /* Mnemonic Additions */
-  MNEM_1:               'Selecteer het adres waarmee je wilt communiceren.',
-  MNEM_2:               'Met jouw enkele HD mnemonic zin heb je toegang tot meerdere wallets / adressen. Selecteer het adres waarmee je nu wilt communiceren.',
-  MNEM_more:            'Meer Adressen',
-  MNEM_prev:            'Vorige Adressen',
+  ERROR_22:             'Could not estimate gas. There are not enough funds in the account, or the receiving contract address would throw an error. Feel free to manually set the gas and proceed. The error message upon sending may be more informative.',
 
   /* Navigation*/
   NAV_YourWallets:      'Jouw Wallets',
   NAV_AddWallet:        'Wallet Toevoegen',
   NAV_GenerateWallet:   'Genereer Wallet',
   NAV_BulkGenerate:     'Bulk Genereren',
-  NAV_SendEther:        'Verzend Ether',
+  NAV_SendEther:        'Verzend Ether en Tokens',
   NAV_SendTokens:       'Verzend Tokens',
   NAV_Offline:          'Verzend Offline',
   NAV_WithdrawDAO:      'DAO Opnemen',
@@ -49,13 +45,13 @@ nl.data = {
   x_PrintDesc:          'ProTip: Klik Afdrukken en sla deze pagina op als PDF, zelfs als je geen printer hebt!',
   x_CSV:                'CSV bestand (onverlseuteld)',
   x_TXT:                'TXT bestand (onverlseuteld)',
-  x_Mnemonic:           'Mnemonic Zin (MetaMask / Jaxx / Ledger)',
+  x_Mnemonic:           'Mnemonic Zin (MetaMask / Jaxx)',
 
   /* Header */
   MEW_Warning_1:        'Check altijd de URL voordat je jouw wallet opent of een nieuwe wallet genereert. Pas op voor phishing sites!',
   CX_Warning_1:         'Zorg voor **externe backups** van alle wallets die je hier opslaat. Er kan kunnen diverse dingen gebeuren die ervoor kunnen zorgen dat je gegevens in deze Chrome Extensie verloren gaan, inclusief het deinstalleren en installeren van de extensie. Deze extensie is een manier om je wallet gemakkelijk toegankelijk te maken, **geen** manier om ze te backuppen.',
   MEW_Tagline:          'Open Source JavaScript Client-Side Ether Wallet',
-	CX_Tagline:           'Open Source JavaScript Client-Side Ether Wallet Chrome Extensie',
+  CX_Tagline:           'Open Source JavaScript Client-Side Ether Wallet Chrome Extensie',
 
   /* Footer */
   FOOTER_1:             'Een open source, javascript, client-side tool om Ethereum Wallets te genereren & transacties te verzenden.',
@@ -237,6 +233,22 @@ nl.data = {
   VIEWWALLET_Subtitle_Short: 'Hiermee kun je verschillende versies van je prive sleutels downloaden en je papieren wallet opnieuw afdrukken. ',
   VIEWWALLET_SuccessMsg:     'Gelukt! Hier zijn je wallet details.',
 
+  /* Hardware wallets */
+  x_Ledger:             'Ledger Nano S',
+  ADD_Ledger_scan:      'Verbind met Ledger Nano S',
+  ADD_Ledger_1:         'Verbind je Ledger Nano S',
+  ADD_Ledger_2:         'Open de Ethereum applicatie (of een contract applicatie)',
+  ADD_Ledger_3:         'Controleer of "Browser Support" is ingeschakeld in je instellingen',
+  ADD_Ledger_4:         'Als je "Browser Support" niet in je instellingen kunt vinden, controleer dan dat je [Firmware >1.2](https://www.ledgerwallet.com/apps/manager) is',
+  ADD_Ledger_0a:        'Her-open MyEtherWallet met een veilige (SSL) verbinding',
+  ADD_Ledger_0b:        'Her-open MyEtherWallet door gebruik te maken van [Chrome](https://www.google.com/chrome/browser/desktop/) of [Opera](https://www.opera.com/)',
+
+  /* Mnemonic Additions */
+  MNEM_1:               'Selecteer het adres waarmee je wilt communiceren.',
+  MNEM_2:               'Met jouw enkele HD mnemonic zin heb je toegang tot meerdere wallets / adressen. Selecteer het adres waarmee je nu wilt communiceren.',
+  MNEM_more:            'Meer Adressen',
+  MNEM_prev:            'Vorige Adressen',
+
   /* Chrome Extension */
   CX_error_1:           'Je hebt nog geen enkele wallets opgeslagen. Klik ["Voeg wallet toe"](/cx-wallet.html#add-wallet) om er een toe te voegen!',
   CX_quicksend:         'VerzendSnel',
@@ -269,6 +281,7 @@ nl.data = {
   SUCCESS_4:            'Je Wallet is succesvol toegevoegd: ',
   SUCCESS_5:            'Je hebt succesvol gestemd. Fijn dat je een actief participerend DAO deelnemer bent.',
   SUCCESS_6:            'Bestand Geselecteerd: ',
+  WARN_Send_Link:       'Je bent hier gekomen via een link waarbij het adres, bedrag, gas of data velden al ingevuld zijn. Indien gewenst kun je elk veld nog aanpassen voor het verzenden. Ontgrendel je wallet on te beginnen.',
 
   /* Geth Error Messages */
   GETH_InvalidSender:      'Ongeldige verzender',

@@ -4,25 +4,38 @@ var no = function() {}
 no.code = 'no';
 no.data = {
 
+  ERROR_22:             'Could not estimate gas. There are not enough funds in the account, or the receiving contract address would throw an error. Feel free to manually set the gas and proceed. The error message upon sending may be more informative.',
+
   /* Mnemonic Additions */
   MNEM_1:               'Please select the address you would like to interact with.',
   MNEM_2:               'Your single HD mnemonic phrase can access a number of wallets / addresses. Please select the address you would like to interact with at this time.',
   MNEM_more:            'More Addresses',
   MNEM_prev:            'Previous Addresses',
-  x_Mnemonic:           'Mnemonic Phrase (MetaMask / Jaxx / Ledger)',
+  x_Mnemonic:           'Mnemonic Phrase (MetaMask / Jaxx)',
   ADD_Radio_5:          'Paste/Type Your Mnemonic',
-  SEND_custom:          'Custom Token',
+  SEND_custom:          'Add Custom Token',
   ERROR_21:             ' is not a valid ERC-20 token. If other tokens are loading, please remove this token and try again.',
   TOKEN_show:           'Show All Tokens',
   TOKEN_hide:           'Hide Tokens',
+  WARN_Send_Link:       'You arrived via a link that has the address, amount, gas or data fields filled in for you. You can change any information before sending. Unlock your wallet to get started.',
+
+  /* Hardware wallets */
+  x_Ledger:             'Ledger Nano S',
+  ADD_Ledger_1:         'Connect your Ledger Nano S',
+  ADD_Ledger_2:         'Open the Ethereum application (or a contract application)',
+  ADD_Ledger_3:         'Verify that Browser Support is enabled in Settings',
+  ADD_Ledger_4:         'If no Browser Support is found in settings, verify that you have [Firmware >1.2](https://www.ledgerwallet.com/apps/manager)',
+  ADD_Ledger_0a:        'Re-open MyEtherWallet on a secure (SSL) connection',
+  ADD_Ledger_0b:        'Re-open MyEtherWallet using [Chrome](https://www.google.com/chrome/browser/desktop/) or [Opera](https://www.opera.com/)',
+  ADD_Ledger_scan:      'Connect to Ledger Nano S',
 
   /* Navigation*/
   NAV_YourWallets:      'Dine lommebøker',
   NAV_AddWallet:        'Legg til lommebok',
   NAV_GenerateWallet:   'Opprett lommebok',
   NAV_BulkGenerate:     'Opprett flere lommebøker',
-  NAV_SendEther:        'Send Ether',
-  NAV_SendTokens:       'Send Token',
+  NAV_SendEther:        'Send Ether & Tokens',
+  NAV_SendTokens:       'Send Tokens',
   NAV_Offline:          'Send Offline',
   NAV_WithdrawDAO:      'Ta ut DAO',
   DAO_TitleLong:        'Løs inn dine DAO-token for ether (ETH)',

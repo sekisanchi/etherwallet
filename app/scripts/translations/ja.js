@@ -4,7 +4,10 @@ var ja = function() {}
 ja.code = 'ja';
 ja.data = {
 
+  ERROR_22:             'Could not estimate gas. There are not enough funds in the account, or the receiving contract address would throw an error. Feel free to manually set the gas and proceed. The error message upon sending may be more informative.',
+
   /* Mnemonic Additions */
+<<<<<<< HEAD
   MNEM_1:               '操作したいアドレスを選択してください。',
   MNEM_2:               'ＨＤニーモニックの一つの文節で、複数のウォレットやアドレスが操作可能です。操作したいアドレスを選択してください。',
   MNEM_more:            'アドレスをもっと',
@@ -15,13 +18,47 @@ ja.data = {
   ERROR_21:             '有効なERC-20トークンではありません',
   TOKEN_show:           '全てのトークンを表示',
   TOKEN_hide:           'トークンを隠す',
+=======
+  MNEM_1:               'Please select the address you would like to interact with.',
+  MNEM_2:               'Your single HD mnemonic phrase can access a number of wallets / addresses. Please select the address you would like to interact with at this time.',
+  MNEM_more:            'More Addresses',
+  MNEM_prev:            'Previous Addresses',
+  x_Mnemonic:           'Mnemonic Phrase (MetaMask / Jaxx)',
+  ADD_Radio_5:          'Paste/Type Your Mnemonic',
+  SEND_custom:          'Add Custom Token',
+  ERROR_21:             ' is not a valid ERC-20 token. If other tokens are loading, please remove this token and try again.',
+  TOKEN_show:           'Show All Tokens',
+  TOKEN_hide:           'Hide Tokens',
+  WARN_Send_Link:       'You arrived via a link that has the address, amount, gas or data fields filled in for you. You can change any information before sending. Unlock your wallet to get started.',
+
+  /* Hardware wallets */
+  x_Ledger:             'Ledger Nano S',
+  ADD_Ledger_1:         'Connect your Ledger Nano S',
+  ADD_Ledger_2:         'Open the Ethereum application (or a contract application)',
+  ADD_Ledger_3:         'Verify that Browser Support is enabled in Settings',
+  ADD_Ledger_4:         'If no Browser Support is found in settings, verify that you have [Firmware >1.2](https://www.ledgerwallet.com/apps/manager)',
+  ADD_Ledger_0a:        'Re-open MyEtherWallet on a secure (SSL) connection',
+  ADD_Ledger_0b:        'Re-open MyEtherWallet using [Chrome](https://www.google.com/chrome/browser/desktop/) or [Opera](https://www.opera.com/)',
+  ADD_Ledger_scan:      'Connect to Ledger Nano S',
+
+  /* Geth Error Messages */
+  GETH_InvalidSender:      '送出元が無効です',
+  GETH_Nonce:              'Nonce が足りません',
+  GETH_Cheap:              'ガス価格が低すぎます',
+  GETH_Balance:            '残高不足',
+  GETH_NonExistentAccount: 'アカウントが存在しない、あるいはその残高不足です',
+  GETH_InsufficientFunds:  'ガス*価格+数量に足りません',
+  GETH_IntrinsicGas:       '基本のガス不足です',
+  GETH_GasLimit:           'ブロックガスリミットを越えています',
+  GETH_NegativeValue:      '負の値です',
+>>>>>>> kvhnuke/mercury
 
   /* Navigation*/
   NAV_YourWallets:      '自分のウォレット',
   NAV_AddWallet:        'ウォレット追加',
   NAV_GenerateWallet:   'ウォレット作成',
   NAV_BulkGenerate:     'バルク作成',
-  NAV_SendEther:        'Ether送出',
+  NAV_SendEther:        'Ether送出 トークン送出',
   NAV_SendTokens:       'トークン送出',
   NAV_Offline:          'オフライン送出',
   NAV_WithdrawDAO:      'DAO払い戻し',
@@ -65,7 +102,11 @@ ja.data = {
   /* Footer */
   FOOTER_1:             'イサリアムウォレットの作成とトランザクション実行のためのオープンソース、javascript、 クライアントサイドツール。',
   FOOTER_1b:            '制作',
+<<<<<<< HEAD
   FOOTER_2:             '投げ銭に感謝致します:',
+=======
+  FOOTER_2:             '投げ銭に感謝致します！:',
+>>>>>>> kvhnuke/mercury
   FOOTER_3:             'クライアントサイドウォレット制作',
   FOOTER_4:             '免責事項',
 

@@ -43,7 +43,7 @@
         <div class="tagline">
           <span style="max-width: 375px" translate="CX_Tagline">Open Source JavaScript Client-Side Ether Wallet Chrome Extension</span>
 
-        &middot; v3.1 &middot;
+        &middot; v3.2 &middot;
         <span class="dropdown">
           <a href="#" class="dropdown-toggle" ng-click="dropdown = !dropdown"> {{curLang}} <span class="caret"></span></a>
           <ul class="dropdown-menu" ng-show="dropdown" style="display:none;" id="langDrop">
@@ -66,6 +66,7 @@
             <li><a ng-class="{true:'active'}[curLang=='Nederlands']" ng-click="changeLanguage('nl','Nederlands')">Nederlands</a></li>
             <li><a ng-class="{true:'active'}[curLang=='Norsk Bokmål']" ng-click="changeLanguage('no','Norsk Bokmål')">Norsk Bokmål</a></li>
             <li><a ng-class="{true:'active'}[curLang=='Polski']" ng-click="changeLanguage('pl','Polski')">Polski</a></li>
+            <li><a ng-class="{true:'active'}[curLang=='Português']" ng-click="changeLanguage('pt','Português')">Português</a></li>
             <li><a ng-class="{true:'active'}[curLang=='Русский']" ng-click="changeLanguage('ru','Русский')">Русский</a></li>
         <!--<li><a ng-class="{true:'active'}[curLang=='Slovenčina']" ng-click="changeLanguage('sk','Slovenčina')">Slovenčina</a></li>-->
         <!--<li><a ng-class="{true:'active'}[curLang=='Slovenščina']" ng-click="changeLanguage('sl','Slovenščina')">Slovenščina</a></li>-->
@@ -637,30 +638,23 @@
     <!-- Send Transaction Page -->
 <article class="tab-pane active" ng-if="globalService.currentTab==globalService.tabs.sendTransaction.id" ng-controller='sendTxCtrl'>
 
-  <!-- TODO: Show this message if the URL has a query string.
-  <p class="alert alert-info" ng-show="tx.sendMode==0"> You clicked a link that has the address, amount, gas, and/or data fields pre-filled for you. You can change any information before sending. Unlock your wallet to get started. </p>
-  -->
+  <!-- Header -->
+  <p class="alert alert-info" translate="WARN_Send_Link" ng-show="hasQueryString"> You arrived via a link that has the address, amount, gas or data fields filled in for you. You can change any information before sending. Unlock your wallet to get started. </p>
 
   <article class="collapse-container">
-
     <div ng-click="wd = !wd">
       <a class="collapse-button"><span ng-show="wd">+</span><span ng-show="!wd">-</span></a>
-
-        <h2 translate="NAV_SendEther"> Send Ether </h2>
-
+      <h2 translate="NAV_SendEther"> Send Ether & Tokens </h2>
     </div>
-    <div ng-show="!wd">
 
-        <p translate="TRANS_desc"> If you want to send Tokens, please use the "Send Token" page instead. </p>
+    <div ng-show="!wd">
           <cx-wallet-decrypt-drtv></cx-wallet-decrypt-drtv>   
         
-
     </div>
   </article>
 
-
-
   <section class="row" ng-show="wallet!=null">
+
     <hr ng-show="!wd" />
 
     <!-- Sidebar -->
@@ -668,11 +662,10 @@
 
       <h4 translate="sidebar_AccountInfo"> Account Information: </h4>
 
-      <div id="addressIdenticon" class="med" title="Address Indenticon" blockie-address="{{wallet.getAddressString()}}" watch-var="wallet"></div>
-
       <div translate="sidebar_AccountAddr"> Account Address: </div>
       <ul class="account-info">
-        <li class="mono wrap"> {{wallet.getChecksumAddressString()}} </li>
+        <div id="addressIdenticon" class="med" title="Address Indenticon" blockie-address="{{wallet.getAddressString()}}" watch-var="wallet"></div>
+        <li class="mono wrap"> {{wallet.getChecksumAddressString()}}  </li>
       </ul>
 
       <div translate="sidebar_AccountBal"> Account Balance: </div>
@@ -680,6 +673,44 @@
         <li><span class="mono wrap">{{etherBalance}}</span> ETH </li>
         <li><span class="mono wrap">{{etcBalance}}</span> ETC </li>
       </ul>
+
+      <!-- Token Balances -->
+      <section class="token-balances">
+        <div translate="sidebar_TokenBal"> Token Balances: </div>
+        <table class="account-info">
+          <tr ng-repeat="token in tokenObjs track by $index" ng-show="token.balance!=0 && token.balance!='loading' || token.type!=='default' || tokenVisibility=='shown'">
+            <td class="mono wrap">
+              <img src="images/icon-remove.svg" class="token-remove" title="Remove Token" ng-click="removeTokenFromLocal(token.symbol)" ng-show="token.type!=='default'"/>
+                {{token.getBalance()}}
+            </td>
+            <td> {{token.getSymbol()}} </td>
+          </tr>
+        </table>
+
+        <a class="btn btn-default btn-sm" ng-click="tokenVisibility='shown'" ng-show="tokenVisibility=='hidden'"> Show All Tokens </a>
+        <a class="btn btn-default btn-sm" ng-click="tokenVisibility='hidden'" ng-show="tokenVisibility=='shown'">  Hide Tokens </a>
+        <a class="btn btn-default btn-sm" ng-click="customTokenField = !customTokenField"> <span translate="SEND_custom"> Add Custom Token </span> </a>
+
+        <div class="custom-token-fields" ng-show="customTokenField">
+          <div class="form-group">
+            <label translate="TOKEN_Addr"> Address: </label>
+            <input class="form-control input-sm" type="text" ng-model="localToken.contractAdd" ng-class="Validator.isValidAddress(localToken.contractAdd) ? 'is-valid' : 'is-invalid'"/>
+          </div>
+          <div class="form-group">
+            <label translate="TOKEN_Symbol"> Token Symbol: </label>
+            <input class="form-control input-sm" type="text" ng-model="localToken.symbol" ng-class="localToken.symbol!='' ? 'is-valid' : 'is-invalid'"/>
+          </div>
+          <div class="form-group">
+            <label translate="TOKEN_Dec"> Decimals: </label>
+            <input class="form-control input-sm" type="text" ng-model="localToken.decimals" ng-class="Validator.isPositiveNumber(localToken.decimals) ? 'is-valid' : 'is-invalid'"/>
+          </div>
+          <div class="form-group">
+            <div class="btn btn-primary btn-sm" ng-click="saveTokenToLocal()" translate="x_Save"> Save </div>
+          </div>
+          <div ng-bind-html="validateLocalToken"></div>
+        </div>
+      </section>
+      <!-- / Token Balances -->
 
       <div translate="sidebar_Equiv"> Equivalent Values: </div>
       <ul class="account-info">
@@ -707,33 +738,51 @@
 
       <h4 translate="SEND_trans">Send Transaction</h4>
 
-      <div class="form-group col-xs-10">
-        <label translate="SEND_addr"> To Address: </label>
-        <input class="form-control"  type="text" placeholder="0x7cB57B5A97eAbe94205C07890BE4c1aD31E486A8" ng-model="tx.to" ng-class="Validator.isValidAddress(tx.to) ? 'is-valid' : 'is-invalid'"/>
-      </div>
-      <div class="col-xs-2 address-identicon-container">
-        <div id="addressIdenticon" title="Address Indenticon" blockie-address="{{tx.to}}" watch-var="tx.to"></div>
-      </div>
-
-      <div class="form-group col-xs-12">
-
-        <label translate="SEND_amount">Amount to Send:</label>
-        <a class="pull-right" ng-click="transferAllBalance()" translate="SEND_TransferTotal">Send Entire Balance</a>
-        <input class="form-control" type="text" placeholder="{{ 'SEND_amount_short' | translate }}" ng-model="tx.value" ng-class="Validator.isPositiveNumber(tx.value) ? 'is-valid' : 'is-invalid'"/>
-        <div class="radio">
-          <label><input type="radio" name="currencyRadio" value="0" ng-model="tx.sendMode"/>
-            <span translate="TRANS_standard">ETH (Standard Transaction)</span></label>
-          <br />
-          <label><input type="radio" name="currencyRadio" value="1" ng-model="tx.sendMode"/>
-            <span translate="TRANS_eth">Only ETH </span></label>
-          <br />
-          <label><input type="radio" name="currencyRadio" value="2" ng-model="tx.sendMode"/>
-            <span translate="TRANS_etc">Only ETC </span></label>
+      <!-- To Address -->
+      <div class="row form-group">
+        <div class="col-xs-10">
+          <label translate="SEND_addr"> To Address: </label>
+          <input class="form-control"  type="text" placeholder="0x7cB57B5A97eAbe94205C07890BE4c1aD31E486A8" ng-model="tx.to" ng-class="Validator.isValidAddress(tx.to) ? 'is-valid' : 'is-invalid'"/>
         </div>
+        <div class="col-xs-2 address-identicon-container">
+          <div id="addressIdenticon" title="Address Indenticon" blockie-address="{{tx.to}}" watch-var="tx.to"></div>
+        </div>
+      </div>
+      <!-- / To Address -->
+
+
+      <!-- Amount to Send -->
+      <div class="form-group">
+        <label translate="SEND_amount">Amount to Send:</label>
+        <div class="input-group">
+          <input class="form-control" type="text" placeholder="{{ 'SEND_amount_short' | translate }}" ng-model="tx.value" ng-class="Validator.isPositiveNumber(tx.value) ? 'is-valid' : 'is-invalid'"/>
+          <div class="input-group-btn">
+            <a class="btn btn-default dropdown-toggle" class="dropdown-toggle" ng-click="dropdownAmount = !dropdownAmount">
+              <span translate="{{unitTranslation}}"></span>{{unitReadable}}
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right" ng-show="dropdownAmount">
+              <li><a ng-class="{true:'active'}[tx.sendMode==0]" ng-click="setSendMode(0)"><span translate="TRANS_standard">ETH (Standard Transaction)</span></a></li>
+              <li><a ng-class="{true:'active'}[tx.sendMode==1]" ng-click="setSendMode(1)"><span translate="TRANS_eth">Only ETH </span></a></li>
+              <li><a ng-class="{true:'active'}[tx.sendMode==2]" ng-click="setSendMode(2)"><span translate="TRANS_etc">Only ETC </span></a></li>
+              <li role="separator" class="divider"></li>
+
+              <li ng-repeat="token in tokenObjs track by $index" ng-show="token.balance!=0 && token.balance!='loading' || token.type!=='default' || tokenVisibility=='shown'">
+                <a ng-class="{true:'active'}[unitReadable == token.getSymbol()]" ng-click="setSendMode(4, $index, token.getSymbol())"> {{token.getSymbol()}} </a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+        <a ng-click="transferAllBalance()"><p class="strong" translate="SEND_TransferTotal">Send Entire Balance</p></a>
+        <!-- / Amount to Send -->
+
+        <!-- Gas -->
         <div class="form-group">
           <label translate="TRANS_gas"> Gas: </label>
           <input class="form-control" type="text" placeholder="21000" ng-model="tx.gasLimit" ng-class="Validator.isPositiveNumber(tx.gasLimit) ? 'is-valid' : 'is-invalid'"/>
         </div>
+        <!-- / Gas -->
 
         <!-- Advanced Option Panel -->
         <div  ng-show="tx.sendMode==0">
@@ -770,13 +819,15 @@
 
         <div class="form-group" ng-bind-html="sendTxStatus"></div>
 
-        <a class="form-group" data-toggle="modal" data-target="#txInfoModal" ng-click="txInfoModal.open()">
-          <div class="alert alert-danger small" translate="TRANS_warning">If you are using the "Only ETH" or "Only ETC" Functions you are sending via a contract. Some services have issues accepting these transactions. Read more.</div>
-        </a>
+        <em class="small">
+          <p><a class="form-group" data-toggle="modal" data-target="#txInfoModal" ng-click="txInfoModal.open()" translate="TRANS_warning">If you are using the "Only ETH" or "Only ETC" Functions you are sending via a contract. Some services have issues accepting these transactions. Read more.</a></p>
+          <p translate="DAO_Warning">** If you are getting an insufficient balance for gas * ... error, you must have a small amount of ETH in your account in order to cover the cost of gas. Add 0.01 ETH to this account and try again.</p>
+        </em>
 
       </div>
-
       <!-- / Content -->
+
+
 
       <!-- Send Modal -->
       <div class="modal fade" id="sendTransaction" tabindex="-1" role="dialog" aria-labelledby="sendTransactionLabel">
@@ -788,15 +839,27 @@
               <h3 class="modal-title text-danger" id="myModalLabel" translate="SENDModal_Title">Warning!</h3>
             </div>
 
-            <div class="modal-body">
+            <div class="modal-body" ng-show="tx.sendMode!==4">
               <h4>
                 <span translate="SENDModal_Content_1">You are about to send</span>
                 <strong id="confirmAmount" class="text-primary"> {{tx.value}} </strong>
-                <strong id="confirmCurrancy" class="text-primary"> {{tx.sendMode == 2 ? "ETC" : "ETH"}}  </strong>
+                <span translate="{{unitTranslation}}"></span>{{unitReadable}}
                 <span translate="SENDModal_Content_2">to address</span>
                 <strong id="confirmAddress" class="text-primary"> {{tx.to}} </strong>
               </h4>
               <h4 translate="SENDModal_Content_3"> Are you sure you want to do this? </h4>
+            </div>
+
+            <div class="modal-body" ng-show="tx.sendMode==4">
+              <h4>
+                <span translate="SENDModal_Content_1">You are about to send</span>
+                <strong id="confirmAmount" class="text-primary"> {{tokenTx.value}} </strong>
+                <span translate="{{unitTranslation}}"></span>{{unitReadable}}
+                <span translate="SENDModal_Content_2">to address</span>
+                <strong id="confirmAddress" class="text-primary"> {{tokenTx.to}} </strong>
+              </h4>
+              <h4 translate="SENDModal_Content_3"> Are you sure you want to do this? </h4>
+              <em><p translate="DAO_Warning">** If you are getting an insufficient balance for gas * ... error, you must have a small amount of ETH in your account in order to cover the cost of gas. Add 0.01 ETH to this account and try again.</p></em>
             </div>
 
             <div class="modal-footer text-center">
@@ -808,6 +871,8 @@
         </div>
       </div>
       <!--/ Send Modal-->
+
+
 
       <!-- Info Modal -->
       <div class="modal fade" id="txInfoModal" tabindex="-1" role="dialog">
@@ -831,7 +896,7 @@
             </div>
 
             <div class="modal-footer text-center">
-              <a href="mailto:myetherwallet@gmail.com" type="button" class="btn btn-danger" translate="TRANSModal_No">Oh gosh, I'm more confused. Help me.</a>
+              <a href="mailto:myetherwallet@gmail.com" type="button" class="btn btn-default" translate="TRANSModal_No">Oh gosh, I'm more confused. Help me.</a>
               <button type="button" class="btn btn-primary" data-dismiss="modal" translate="TRANSModal_Yes">Sweet, I get it now.</button>
             </div>
 
@@ -897,38 +962,22 @@
     </div>
     <div class="form-group col-sm-10">
       <label translate="OFFLINE_Step2_Label_2"> Value / Amount to Send </label>
-      <input class="form-control" type="text" placeholder="{{ 'SEND_amount_short' | translate }}" ng-model="tx.value"/>
-      <div class="radio">
-        <label><input type="radio" name="currencyRadioOffline" checked value="ether" ng-model="tokenTx.id"/>Ether</label>
-      </div>
-
-      <div class="radio">
-        <label ng-repeat="token in tokenObjs track by $index">
-          <input type="radio" name="currencyRadioOffline" value="{{$index}}" ng-model="tokenTx.id"/>
-          {{token.getSymbol()}}
-        </label>
-        <label>
-          <input type="radio" name="currencyRadioOffline" value="99" ng-model="tokenTx.id"/>
-          <span translate="SEND_custom">Custom Token</span>
-        </label>
-      </div>
-      <div class="custom-token-fields well" style="max-width: 600px" ng-show="tokenTx.id==99">
-        <div class="form-group">
-          <label translate="TOKEN_Addr"> Address: </label>
-          <input class="form-control" type="text" ng-model="localToken.contractAdd"/>
+      <div class="input-group">
+        <input class="form-control" type="text" placeholder="{{ 'SEND_amount_short' | translate }}" ng-model="tx.value"/>
+        <div class="input-group-btn">
+          <a class="btn btn-default dropdown-toggle" class="dropdown-toggle" ng-click="dropdownAmount = !dropdownAmount"> {{unitReadable}} <span class="caret"></span></a>
+          <ul class="dropdown-menu dropdown-menu-right" ng-show="dropdownAmount">
+            <li>
+              <a name="currencyRadioOffline" ng-class="{true:'active'}[tokenTx.id == 'ether']" ng-click="setSendMode('ether')">ETH</a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li ng-repeat="token in tokenObjs track by $index">
+              <a name="currencyRadioOffline" ng-class="{true:'active'}[tokenTx.id == $index]" ng-click="setSendMode($index)" > {{token.getSymbol()}} </a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li><a name="currencyRadioOffline" value="99" ng-model="tokenTx.id"><span translate="SEND_custom">Custom Token</span></a></li>
+          </ul>
         </div>
-        <div class="form-group">
-          <label translate="TOKEN_Symbol"> Token Symbol: </label>
-          <input class="form-control" type="text" ng-model="localToken.symbol"/>
-        </div>
-        <div class="form-group">
-          <label translate="TOKEN_Dec"> Decimals: </label>
-          <input class="form-control" type="text" ng-model="localToken.decimals"/>
-        </div>
-        <div class="form-group">
-          <div class="btn btn-info" ng-click="saveTokenToLocal()" translate="x_Save"> Save </div>
-        </div>
-        <div ng-bind-html="validateLocalToken"></div>
       </div>
     </div>
     <div class="form-group col-sm-10">
@@ -1012,7 +1061,8 @@
         </div>
         <div class="modal-body">
           <h4>
-            <span translate="SENDModal_Content_1"> You are about to send </span> a transaction.
+            <span translate="SENDModal_Content_1"> You are about to send </span>
+            <span class="text-primary">{{valueReadable}} {{unitReadable}}</span>
           </h4>
           <h4 translate="SENDModal_Content_3"> Are you sure you want to do this? </h4>
         </div>
@@ -1027,216 +1077,6 @@
 
 </article>
 <!-- /send transaction -->
-
-
-    <!-- Tokens Panel -->
-<article class="tab-pane page-tokens active" ng-if="globalService.currentTab==globalService.tabs.tokens.id"  ng-controller='tokenCtrl'>
-
-  <article class="collapse-container">
-
-    <div ng-click="wd = !wd">
-      <a class="collapse-button"><span ng-show="wd">+</span><span ng-show="!wd">-</span></a>
-      <h2 translate="NAV_SendTokens"> Send Tokens </h2>
-    </div>
-
-    <div ng-show="!wd">
-          <cx-wallet-decrypt-drtv></cx-wallet-decrypt-drtv>   
-        
-    </div>
-
-  </article>
-
-  <section class="row" ng-show="wallet!=null">
-
-    <hr ng-show="!wd" />
-
-    <!-- Sidebar -->
-    <div class="col-sm-4">
-
-      <h4 translate="sidebar_AccountInfo"> Account Information: </h4>
-
-      <div id="addressIdenticon" class="med" title="Address Indenticon" blockie-address="{{wallet.getAddressString()}}" watch-var="wallet"></div>
-
-      <div translate="sidebar_AccountAddr"> Account Address: </div>
-      <ul class="account-info">
-        <li class="mono wrap"> {{wallet.getChecksumAddressString()}} </li>
-      </ul>
-
-      <div translate="sidebar_AccountBal"> Account Balance: </div>
-      <ul class="account-info">
-        <li><span class="mono wrap">{{etherBalance}}</span> Ether </li>
-        <li><span class="mono wrap">{{etcBalance}}</span> ETC</li>
-      </ul>
-
-      <div translate="sidebar_TokenBal"> Token Balances: </div>
-      <table class="account-info">
-          <tr ng-repeat="token in tokenObjs track by $index" ng-show="token.balance!=0 && token.balance!='loading' || token.type!=='default' || tokenVisibility=='shown'">
-            <td class="mono wrap">
-              <img src="images/icon-remove.svg" class="token-remove" title="Remove Token" ng-click="removeTokenFromLocal(token.symbol)" ng-show="token.type!=='default'"/>
-              {{token.getBalance()}}
-            </td>
-            <td> {{token.getSymbol()}} </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <p>
-                <a ng-click="tokenVisibility='shown'" ng-show="tokenVisibility=='hidden'"> Show All Tokens </a>
-                <a ng-click="tokenVisibility='hidden'" ng-show="tokenVisibility=='shown'">  Hide Tokens </a>
-              </p>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-            <small ng-bind-html="validateTokenBalances"></small>
-            </td>
-          </tr>
-      </table>
-
-      <div translate="sidebar_Equiv"> Equivalent Values: </div>
-      <ul class="account-info">
-        <li><span class="mono wrap">{{usdBalance}}</span> USD</li>
-        <li><span class="mono wrap">{{eurBalance}}</span> EUR</li>
-        <li><span class="mono wrap">{{btcBalance}}</span> BTC</li>
-      </ul>
-
-      <div translate="sidebar_TransHistory"> Transaction History: </div>
-      <ul class="account-info">
-        <li><a href="https://etherscan.io/address/{{wallet.getAddressString()}}" target="_blank">https://etherscan.io/address/ {{wallet.getAddressString()}}</a></li>
-      </ul>
-
-      <div class="well">
-        <p translate="sidebar_donation"> MyEtherWallet is a free, open-source service dedicated to your privacy and security. The more donations we receive, the more time we spend creating new features, listening to your feedback, and giving you what you want. We are just two people trying to change the world. Help us?</p>
-        <a class="btn btn-primary btn-block" ng-click="onDonateClick()" translate="sidebar_donate">DONATE</a>
-        <div class="text-success text-center marg-v-sm" ng-show="tx.donate" translate="sidebar_thanks"> THANK YOU!!! </div>
-      </div>
-
-    </div>
-    <!-- / Sidebar -->
-
-
-
-    <!-- Content -->
-    <div class="col-sm-8">
-
-      <section class="daoGetTokens clearfix">
-
-        <h4 translate="NAV_SendTokens">Send Tokens</h4>
-
-        <div class="form-group col-xs-10">
-          <label translate="SEND_addr"> To Address: </label>
-          <input class="form-control" type="text" placeholder="0x7cB57B5A97eAbe94205C07890BE4c1aD31E486A8" ng-model="tokenTx.to" ng-class="Validator.isValidAddress(tokenTx.to) ? 'is-valid' : 'is-invalid'"/>
-          <div ng-bind-html="validateAddressStatus"></div>
-        </div>
-
-        <div class="col-xs-2 address-identicon-container">
-          <div id="addressIdenticon" title="Address Indenticon" blockie-address="{{tokenTx.to}}" watch-var="tokenTx.to"></div>
-        </div>
-
-        <div class="form-group col-xs-12">
-
-          <label translate="SEND_amount"> Amount to Send: </label>
-          <input class="form-control" type="text" placeholder="{{ 'SEND_amount_short' | translate }}" ng-model="tokenTx.value" ng-class="Validator.isPositiveNumber(tokenTx.value) ? 'is-valid' : 'is-invalid'"/>
-
-          <div class="radio">
-            <label ng-repeat="token in tokenObjs track by $index" ng-show="token.balance!=0 && token.balance!='loading' || tokenVisibility=='shown' ">
-              <input type="radio" name="currencyRadio" value="{{$index}}" ng-model="tokenTx.id"/>
-              {{token.getSymbol()}}
-            </label>
-            <label>
-              <input type="radio" name="currencyRadio" value="99" ng-model="tokenTx.id"/>
-              <span translate="SEND_custom">Custom</span>
-            </label>
-          </div>
-
-          <div class="custom-token-fields well" ng-show="tokenTx.id==99">
-            <p translate="HELP_7_Desc_0">[Check out Ethplorer.io](https://ethplorer.io/) if you need help finding symbol / decimal.</p>
-            <div class="form-group">
-              <label translate="TOKEN_Addr"> Address: </label>
-              <input class="form-control" type="text" ng-model="localToken.contractAdd"/>
-            </div>
-            <div class="form-group">
-              <label translate="TOKEN_Symbol"> Token Symbol: </label>
-              <input class="form-control" type="text" ng-model="localToken.symbol"/>
-            </div>
-            <div class="form-group">
-              <label translate="TOKEN_Dec"> Decimals: </label>
-              <input class="form-control" type="text" ng-model="localToken.decimals"/>
-            </div>
-            <div class="form-group">
-              <div class="btn btn-info" ng-click="saveTokenToLocal()" translate="x_Save"> Save </div>
-            </div>
-            <div ng-bind-html="validateLocalToken"></div>
-          </div>
-
-          <div class="form-group">
-            <label class="SEND_gas"> Gas: </label>
-            <input class="form-control" type="text" ng-model="tokenTx.gasLimit" ng-class="Validator.isPositiveNumber(tokenTx.gasLimit) ? 'is-valid' : 'is-invalid'"/>
-          </div>
-
-        </div>
-
-        <div class="form-group col-xs-12">
-          <a class="btn btn-info btn-block" ng-click="generateTokenTx()" translate="SEND_generate"> Generate Transaction </a>
-        </div>
-
-        <div class="col-xs-12">
-           <div ng-bind-html="validateTxStatus"></div>
-        </div>
-
-        <div class="form-group col-xs-12" ng-show="showRaw">
-          <label translate="SEND_raw"> Raw Transaction </label>
-          <textarea class="form-control" rows="4" disabled >{{rawTx}}</textarea>
-          <label translate="SEND_signed"> Signed Transaction </label>
-          <textarea class="form-control" rows="4" disabled >{{signedTx}}</textarea>
-        </div>
-
-        <div class="form-group col-xs-12" ng-show="showRaw">
-          <a class="btn btn-primary btn-block" data-toggle="modal" data-target="#sendTransaction" translate="SEND_trans">Send Transaction</a>
-        </div>
-
-        <div class="form-group col-xs-12" ng-bind-html="sendTxStatus"></div>
-
-        <div class="form-group col-xs-12"><p translate="DAO_Warning">If you are getting an <em>insufficient balance for gas * ... </em> error, you must have a small amount of ETH in your account in order to cover the cost of gas. Add 0.01 ETH to this account and try again. </p></div>
-
-      </section>
-
-    </div>
-    <!-- / Content -->
-
-
-
-    <!-- Send Modal -->
-    <div class="modal fade" id="sendTransaction" tabindex="-1" role="dialog" aria-labelledby="sendTransactionLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h3 class="modal-title text-danger" id="myModalLabel" translate="SENDModal_Title">Warning!</h3>
-          </div>
-          <div class="modal-body">
-            <h4>
-              <span translate="SENDModal_Content_1">You are about to send</span>
-              <strong id="confirmAmount" class="text-primary"> {{tokenTx.value}} </strong>
-              <strong id="confirmCurrancy" class="text-primary"> {{tokenObjs[tokenTx.id].getSymbol()}} </strong>
-              <span translate="SENDModal_Content_2">to address</span>
-              <strong id="confirmAddress" class="text-primary"> {{tokenTx.to}} </strong>
-            </h4>
-            <h4 translate="SENDModal_Content_3"> Are you sure you want to do this? </h4>
-            <em><p translate="SENDModal_Content_4"> NOTE: If you encounter an error, you most likely need to add ETH to your account to cover the gas cost of sending tokens. Gas is paid in ETH. </p></em>
-          </div>
-          <div class="modal-footer text-center">
-            <button type="button" class="btn btn-default" data-dismiss="modal" translate="SENDModal_No">No, get me out of here!</button>
-            <button type="button" class="btn btn-primary" ng-click="sendTx()" translate="SENDModal_Yes">Yes, I am sure! Make transaction.</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- / Send Modal -->
-
-  </section>
-
-</article>
-<!-- / Tokens Panel -->
 
 
     <!-- The DAO -->

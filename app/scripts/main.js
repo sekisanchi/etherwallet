@@ -44,6 +44,14 @@ if (IS_CX) {
 	var cxFuncs = require('./cxFuncs');
 	window.cxFuncs = cxFuncs;
 }
+else {
+	var u2f = require('./staticJS/u2f-api');
+	var ledger3 = require('./ledger3');
+	var ledgerEth = require('./ledger-eth');	
+	window.u2f = u2f;
+	window.Ledger3 = ledger3;
+	window.ledgerEth = ledgerEth;	
+}
 var tabsCtrl = require('./controllers/tabsCtrl');
 var viewCtrl = require('./controllers/viewCtrl');
 var walletGenCtrl = require('./controllers/walletGenCtrl');
@@ -54,7 +62,6 @@ var sendTxCtrl = require('./controllers/sendTxCtrl');
 var deployContractCtrl = require('./controllers/deployContractCtrl');
 var digixCtrl = require('./controllers/digixCtrl');
 var theDaoCtrl = require('./controllers/theDaoCtrl');
-var tokenCtrl = require('./controllers/tokenCtrl');
 var footerCtrl = require('./controllers/footerCtrl');
 var sendOfflineTxCtrl = require('./controllers/sendOfflineTxCtrl');
 var globalService = require('./services/globalService');
@@ -96,7 +103,6 @@ app.controller('sendTxCtrl', ['$scope', '$sce', 'walletService', sendTxCtrl]);
 app.controller('deployContractCtrl', ['$scope', '$sce', 'walletService', deployContractCtrl]);
 app.controller('digixCtrl', ['$scope', '$sce', 'walletService', digixCtrl]);
 app.controller('theDaoCtrl', ['$scope', '$sce', 'walletService', theDaoCtrl]);
-app.controller('tokenCtrl', ['$scope', '$sce', 'walletService', tokenCtrl]);
 app.controller('footerCtrl', ['$scope', footerCtrl]);
 app.controller('sendOfflineTxCtrl', ['$scope', '$sce', 'walletService', sendOfflineTxCtrl]);
 if (IS_CX) {
