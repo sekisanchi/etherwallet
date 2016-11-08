@@ -4,61 +4,14 @@ var ja = function() {}
 ja.code = 'ja';
 ja.data = {
 
-  ERROR_22:             'Could not estimate gas. There are not enough funds in the account, or the receiving contract address would throw an error. Feel free to manually set the gas and proceed. The error message upon sending may be more informative.',
-
-  /* Mnemonic Additions */
-<<<<<<< HEAD
-  MNEM_1:               '操作したいアドレスを選択してください。',
-  MNEM_2:               'ＨＤニーモニックの一つの文節で、複数のウォレットやアドレスが操作可能です。操作したいアドレスを選択してください。',
-  MNEM_more:            'アドレスをもっと',
-  MNEM_prev:            '前のアドレス',
-  x_Mnemonic:           'ニーモニックフレーズ (MetaMask / Jaxx / Ledger)',
-  ADD_Radio_5:          'ニーモニックを上書き/タイプ',
-  SEND_custom:          'カスタムトークン',
-  ERROR_21:             '有効なERC-20トークンではありません',
-  TOKEN_show:           '全てのトークンを表示',
-  TOKEN_hide:           'トークンを隠す',
-=======
-  MNEM_1:               'Please select the address you would like to interact with.',
-  MNEM_2:               'Your single HD mnemonic phrase can access a number of wallets / addresses. Please select the address you would like to interact with at this time.',
-  MNEM_more:            'More Addresses',
-  MNEM_prev:            'Previous Addresses',
-  x_Mnemonic:           'Mnemonic Phrase (MetaMask / Jaxx)',
-  ADD_Radio_5:          'Paste/Type Your Mnemonic',
-  SEND_custom:          'Add Custom Token',
-  ERROR_21:             ' is not a valid ERC-20 token. If other tokens are loading, please remove this token and try again.',
-  TOKEN_show:           'Show All Tokens',
-  TOKEN_hide:           'Hide Tokens',
-  WARN_Send_Link:       'You arrived via a link that has the address, amount, gas or data fields filled in for you. You can change any information before sending. Unlock your wallet to get started.',
-
-  /* Hardware wallets */
-  x_Ledger:             'Ledger Nano S',
-  ADD_Ledger_1:         'Connect your Ledger Nano S',
-  ADD_Ledger_2:         'Open the Ethereum application (or a contract application)',
-  ADD_Ledger_3:         'Verify that Browser Support is enabled in Settings',
-  ADD_Ledger_4:         'If no Browser Support is found in settings, verify that you have [Firmware >1.2](https://www.ledgerwallet.com/apps/manager)',
-  ADD_Ledger_0a:        'Re-open MyEtherWallet on a secure (SSL) connection',
-  ADD_Ledger_0b:        'Re-open MyEtherWallet using [Chrome](https://www.google.com/chrome/browser/desktop/) or [Opera](https://www.opera.com/)',
-  ADD_Ledger_scan:      'Connect to Ledger Nano S',
-
-  /* Geth Error Messages */
-  GETH_InvalidSender:      '送出元が無効です',
-  GETH_Nonce:              'Nonce が足りません',
-  GETH_Cheap:              'ガス価格が低すぎます',
-  GETH_Balance:            '残高不足',
-  GETH_NonExistentAccount: 'アカウントが存在しない、あるいはその残高不足です',
-  GETH_InsufficientFunds:  'ガス*価格+数量に足りません',
-  GETH_IntrinsicGas:       '基本のガス不足です',
-  GETH_GasLimit:           'ブロックガスリミットを越えています',
-  GETH_NegativeValue:      '負の値です',
->>>>>>> kvhnuke/mercury
+  ERROR_22:             'ガス量を推定できません。十分な資金が口座にないか、あるいは受け取り側のコントラクトがエラーになっています。ガス量を変更してから試してください。送出時にはより詳しいエラーメッセージが返ります。',
 
   /* Navigation*/
   NAV_YourWallets:      '自分のウォレット',
   NAV_AddWallet:        'ウォレット追加',
   NAV_GenerateWallet:   'ウォレット作成',
   NAV_BulkGenerate:     'バルク作成',
-  NAV_SendEther:        'Ether送出 トークン送出',
+  NAV_SendEther:        'Etherとトークン送出',
   NAV_SendTokens:       'トークン送出',
   NAV_Offline:          'オフライン送出',
   NAV_WithdrawDAO:      'DAO払い戻し',
@@ -82,6 +35,7 @@ ja.data = {
   x_Keystore:           'Keystore ファイル (UTC / JSON · 推奨 · 暗号化 · Mist フォーマット)',
   x_Keystore2:          'Keystore ファイル (UTC / JSON) ',
   x_KeystoreDesc:       'この Keystore / JSON ファイルは、後で容易にインポートするため、Mistで使われているフォーマットと一致させる必要があります。ダウンロードしてバックアップを取ることをおすすめします。',
+  x_Mnemonic:           'ニーモニックフレーズ (MetaMask / Jaxx)',
   x_Password:           'パスワード',
   x_Print:              'ペーパーウォレットを印刷',
   x_PrintDesc:          'ProTip: プリンターが接続されていなくても、「印刷」をクリックしてPDFで保存できます。',
@@ -102,11 +56,7 @@ ja.data = {
   /* Footer */
   FOOTER_1:             'イサリアムウォレットの作成とトランザクション実行のためのオープンソース、javascript、 クライアントサイドツール。',
   FOOTER_1b:            '制作',
-<<<<<<< HEAD
   FOOTER_2:             '投げ銭に感謝致します:',
-=======
-  FOOTER_2:             '投げ銭に感謝致します！:',
->>>>>>> kvhnuke/mercury
   FOOTER_3:             'クライアントサイドウォレット制作',
   FOOTER_4:             '免責事項',
 
@@ -135,6 +85,7 @@ ja.data = {
   ADD_Radio_2_short:      'ウォレットファイルを選択',
   ADD_Radio_3:            'プライベートキーをペースト/タイプ ',
   ADD_Radio_4:            '監視するアカウントを追加',
+  ADD_Radio_5:            'ニーモニックを上書き/タイプ',
   ADD_Label_2:            'ニックネームの作成：',
   ADD_Label_3:            'ウォレットが暗号化されました。パスワードを入力してください： ',
   ADD_Label_4:            '監視するアカウントを追加',
@@ -163,6 +114,7 @@ ja.data = {
   SEND_addr:             '宛先アドレス： ',
   SEND_amount:           '送出数量： ',
   SEND_amount_short:     '数量',
+  SEND_custom:           'カスタムトークンを追加',  
   SEND_gas:              'ガス',
   SEND_TransferTotal:    '残高をすべて送出する',
   SEND_generate:         'トランザクションを生成',
@@ -182,6 +134,8 @@ ja.data = {
   TOKEN_Addr:            'アドレス：',
   TOKEN_Symbol:          'トークンシンボル： ',
   TOKEN_Dec:             'ケタ数： ',
+  TOKEN_show:            '全てのトークンを表示',
+  TOKEN_hide:            'トークンを隠す',  
 
   /* Send Transaction */
   TRANS_desc:            'トークンを送出するには「トークン送出」のタブを選択してください。',
@@ -201,7 +155,7 @@ ja.data = {
   TRANSModal_Content_2:  '**ETHのみ: ** [Timon Rappのリプレイコントラクト(VB推奨)](https://blog.ethereum.org/2016/07/26/onward_from_the_hard_fork/) を使用して、**ETH**チェーンのみに送出します。',
   TRANSModal_Content_3:  '**ETCのみ: ** [Timon Rappのリプレイコントラクト(VB推奨)](https://blog.ethereum.org/2016/07/26/onward_from_the_hard_fork/) を使用して、**ETC**チェーンのみに送出します。 ',
   TRANSModal_Content_4:  '**Coinbase & ShapeShift: ** スタンダードトランザクションのみで送出します。どちらかのみのコントラクトで送出する場合には、サポートスタッフに連絡して、手動で残高に追加したり払い戻しをする必要があります。[Shapeshiftの「スプリット」ツールも使用可能です。(https://split.shapeshift.io/)',
-  TRANSModal_Content_5:  '**Kraken & Poloniex:** No known issues. Use whatever.',
+  TRANSModal_Content_5:  '**Kraken & Poloniex:** 既知の問題はありません。 そのままお使いください',
   TRANSModal_Yes:        '理解しました。',
   TRANSModal_No:         '理解できません。教えてください。',
 
@@ -279,6 +233,22 @@ ja.data = {
   VIEWWALLET_Subtitle_Short: '異なったバージョンのプライベートキーをダウンロードしたり、ペーパーウォレットを再印刷することができます。',
   VIEWWALLET_SuccessMsg:     '成功! ウォレットの詳細は以下の通りです。',
 
+    /* Mnemonic Additions */
+  MNEM_1:               '操作したいアドレスを選択してください。',
+  MNEM_2:               'ＨＤニーモニックの一つの文節で、複数のウォレットやアドレスが操作可能です。操作したいアドレスを選択してください。',
+  MNEM_more:            'アドレスをもっと',
+  MNEM_prev:            '前のアドレス',
+  
+    /* Hardware wallets */
+  x_Ledger:             'Ledger Nano S',
+  ADD_Ledger_1:         'Ledger Nano Sをつなげてください',
+  ADD_Ledger_2:         'イサリアムアプリケーション(またはコントラクト)を開いてください',
+  ADD_Ledger_3:         'ブラウザサポート(Browser Support)が有効に設定されているかどうか確認してください',
+  ADD_Ledger_4:         'もし、ブラウザサポート(Browser Support)が見つからなければ、ファームウェアが1.2以上になっているか確認してください(https://www.ledgerwallet.com/apps/manager)',
+  ADD_Ledger_0a:        'MyEtherWalletを、安全な(SSL)接続で再度開いてください',
+  ADD_Ledger_0b:        'MyEtherWalletを、[Chrome](https://www.google.com/chrome/browser/desktop/) または [Opera](https://www.opera.com/)を使って再度開いてください',
+  ADD_Ledger_scan:      'Ledger Nano Sに接続',
+  
   /* Chrome Extension */
   CX_error_1:           'ウォレットが保存されていません。["Add Wallet"](/cx-wallet.html#add-wallet)をクリックして追加してください。',
   CX_quicksend:         '簡易送信', // if no appropriate translation, just use "Send"
@@ -304,12 +274,15 @@ ja.data = {
   ERROR_18:             'ガスとして使われるために、少なくとも0.01 etherがウォレット上に必要です。 ',
   ERROR_19:             '全てのガスがこのトランザクションにより消費されます。これは、既に投票を行ったか、あるいはディベート期間が終了したためです。',　
   ERROR_20:             '無効なシンボル',
+  ERROR_21:             ' は有効なERC-20トークンではありません。他に別のトークンがあれば、このトークンを取り除いてからもう一度試してください。',  
   SUCCESS_1:            '有効なアドレス',
   SUCCESS_2:            'ウォレットは正常に暗号解除されました。',
   SUCCESS_3:            'トランザクションが送出されました。 TX ID: ',
   SUCCESS_4:            'ウォレットが追加されました：',
   SUCCESS_5:            '投票が完了しました。The DAO への積極的な参加に感謝いたします。',
   SUCCESS_6:            '選択されました： ',
+  
+  WARN_Send_Link:       '自分のアドレス、総量、ガスまたはデータの入ったリンクで処理されました。送出する前にいずれの値も変更可能です。ウォレットをアンロックしてから始めてください。',
 
   /* Geth Error Messages */
   GETH_InvalidSender:      '送出元が無効です',
@@ -334,7 +307,7 @@ ja.data = {
 
   /* Tranlsation Info */
   translate_version:    '0.3',
-  Translator_Desc:      'トランスレーターに感謝して投げ銭： ',
+  Translator_Desc:      'トランスレーターにご褒美の投げEther： ',
   TranslatorName_1:     '[sekisanchi](https://www.myetherwallet.com/?gaslimit=21000&to=0xf991119Eea62Eee1a6fdaA7f621e91A42f325FcE&value=1.0#send-transaction)',
   TranslatorAddr_1:     '0xf991119Eea62Eee1a6fdaA7f621e91A42f325FcE',
   /* Translator 1: Kazunori Seki / 関一典 */
