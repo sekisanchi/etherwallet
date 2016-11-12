@@ -3,8 +3,47 @@
 var ja = function() {}
 ja.code = 'ja';
 ja.data = {
+<<<<<<< HEAD
 
   ERROR_22:             'ガス量を推定できません。十分な資金が口座にないか、あるいは受け取り側のコントラクトがエラーになっています。ガス量を変更してから試してください。送出時にはより詳しいエラーメッセージが返ります。',
+=======
+  TRANS_gas:             ' ガス： ', // changed in ENG to Gas Limit:
+  ERROR_22:             'Could not estimate gas. There are not enough funds in the account, or the receiving contract address would throw an error. Feel free to manually set the gas and proceed. The error message upon sending may be more informative.',
+
+  /* Mnemonic Additions */
+  MNEM_1:               'Please select the address you would like to interact with.',
+  MNEM_2:               'Your single HD mnemonic phrase can access a number of wallets / addresses. Please select the address you would like to interact with at this time.',
+  MNEM_more:            'More Addresses',
+  MNEM_prev:            'Previous Addresses',
+  x_Mnemonic:           'Mnemonic Phrase (MetaMask / Jaxx)',
+  ADD_Radio_5:          'Paste/Type Your Mnemonic',
+  SEND_custom:          'Add Custom Token',
+  ERROR_21:             ' is not a valid ERC-20 token. If other tokens are loading, please remove this token and try again.',
+  TOKEN_show:           'Show All Tokens',
+  TOKEN_hide:           'Hide Tokens',
+  WARN_Send_Link:       'You arrived via a link that has the address, amount, gas or data fields filled in for you. You can change any information before sending. Unlock your wallet to get started.',
+
+  /* Hardware wallets */
+  x_Ledger:             'Ledger Nano S',
+  ADD_Ledger_1:         'Connect your Ledger Nano S',
+  ADD_Ledger_2:         'Open the Ethereum application (or a contract application)',
+  ADD_Ledger_3:         'Verify that Browser Support is enabled in Settings',
+  ADD_Ledger_4:         'If no Browser Support is found in settings, verify that you have [Firmware >1.2](https://www.ledgerwallet.com/apps/manager)',
+  ADD_Ledger_0a:        'Re-open MyEtherWallet on a secure (SSL) connection',
+  ADD_Ledger_0b:        'Re-open MyEtherWallet using [Chrome](https://www.google.com/chrome/browser/desktop/) or [Opera](https://www.opera.com/)',
+  ADD_Ledger_scan:      'Connect to Ledger Nano S',
+
+  /* Geth Error Messages */
+  GETH_InvalidSender:      '送出元が無効です',
+  GETH_Nonce:              'Nonce が足りません',
+  GETH_Cheap:              'ガス価格が低すぎます',
+  GETH_Balance:            '残高不足',
+  GETH_NonExistentAccount: 'アカウントが存在しない、あるいはその残高不足です',
+  GETH_InsufficientFunds:  'ガス*価格+数量に足りません',
+  GETH_IntrinsicGas:       '基本のガス不足です',
+  GETH_GasLimit:           'ブロックガスリミットを越えています',
+  GETH_NegativeValue:      '負の値です',
+>>>>>>> kvhnuke/mercury
 
   /* Navigation*/
   NAV_YourWallets:      '自分のウォレット',
@@ -145,7 +184,7 @@ ja.data = {
   TRANS_etc:             'ETCのみ',
   TRANS_advanced:        '+Advanced: データを追加してください ',
   TRANS_data:            ' データ： ',
-  TRANS_gas:             ' ガス： ',
+
   TRANS_sendInfo:        '21000ガスを使用する標準トランザクションは、0.000441 ETHを消費します。迅速な処理を行うために、若干最小量よりも多めの0.000000021 ETHのガスを使用します。当サービスでは、トランザクション料金は徴収いたしません。',
 
   /* Send Transaction Modals */
@@ -355,8 +394,8 @@ ja.data = {
   HELP_2a_Desc_6:      'Keep in mind, you must prevent loss of the keys and password due to loss or failure of you hard drive failure, or USB drive, or piece of paper. You also must keep in mind physical loss / damage of an entire area (think fire or flood).',
 
   HELP_2b_Title:       '2b) How do I safely / offline / cold storage with MyEtherWallet?',
-  HELP_2b_Desc_1:      'Go to our github: [https://github.com/kvhnuke/etherwallet/tree/gh-pages](https://github.com/kvhnuke/etherwallet/tree/gh-pages).',
-  HELP_2b_Desc_2:      'Click download zip in the upper right.',
+  HELP_2b_Desc_1:      'Go to [https://github.com/kvhnuke/etherwallet/releases/latest](https://github.com/kvhnuke/etherwallet/releases/latest).',
+  HELP_2b_Desc_2:      'Click on `dist-vX.X.X.X.zip`.',
   HELP_2b_Desc_3:      'Move zip to an airgapped computer.',
   HELP_2b_Desc_4:      'Unzip it and double-click `index.html`.',
   HELP_2b_Desc_5:      'Generate a wallet with a strong password.',
@@ -405,18 +444,12 @@ ja.data = {
 
   HELP_5_Title:         '5) How do I run MyEtherWallet.com offline/locally? ',
   HELP_5_Desc_1:        'You can run MyEtherWallet.com on your computer instead of from the GitHub servers. You can generate a wallet completely offline and send transactions from the "Offline Transaction" page.',
-  HELP_5_Desc_2:        'Go to our github: [https://github.com/kvhnuke/etherwallet/tree/gh-pages](https://github.com/kvhnuke/etherwallet/tree/gh-pages).',
-  HELP_5_Desc_3:        'Click download zip in the upper right.',
-  HELP_5_Desc_4:        'Move zip to an airgapped computer.',
-  HELP_5_Desc_5:        'Unzip it.',
-  HELP_5_Desc_6:        'Double-Click `index.html`.',
   HELP_5_Desc_7:        'MyEtherWallet.com is now running entirely on your computer.',
   HELP_5_Desc_8:        'In case you are not familiar, you need to keep the entire folder in order to run the website, not just `index.html`. Don\'t touch or move anything around in the folder. If you are storing a backup of the MyEtherWallet repo for the future, we recommend just storing the ZIP so you can be sure the folder contents stay intact.',
   HELP_5_Desc_9:        'As we are constantly updating MyEtherWallet.com, we recommend you periodically update your saved version of the repo.',
 
   HELP_5CX_Title:       '5) How can I install this extension from the repo instead of the Chrome Store? ',
-  HELP_5CX_Desc_1:      'Go to our github and find the most recent Chrome Extension release: [https://github.com/kvhnuke/etherwallet/tree/mercury/chrome-extension-releases](https://github.com/kvhnuke/etherwallet/tree/mercury/chrome-extension-releases).',
-  HELP_5CX_Desc_2:      'Scroll to the very bottom and right click on the latest release. Click "save link as".',
+  HELP_5CX_Desc_2:      'Click on `chrome-extension-vX.X.X.X.zip` and unzip it.',
   HELP_5CX_Desc_3:      'Go to Google Chrome and find you settings (in the menu in the upper right).',
   HELP_5CX_Desc_4:      'Click "Extensions" on the left.',
   HELP_5CX_Desc_5:      'Check the "Developer Mode" button at the top of that page.',

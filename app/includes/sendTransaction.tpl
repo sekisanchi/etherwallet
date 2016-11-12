@@ -120,7 +120,7 @@
         <div class="input-group">
           <input class="form-control" type="text" placeholder="{{ 'SEND_amount_short' | translate }}" ng-model="tx.value" ng-class="Validator.isPositiveNumber(tx.value) ? 'is-valid' : 'is-invalid'"/>
           <div class="input-group-btn">
-            <a class="btn btn-default dropdown-toggle" class="dropdown-toggle" ng-click="dropdownAmount = !dropdownAmount">
+            <a class="btn btn-default dropdown-toggle" class="dropdown-toggle" ng-click="dropdownAmount = !dropdownAmount" ng-class="dropdownEnabled ? '' : 'disabled'">
               <span translate="{{unitTranslation}}"></span>{{unitReadable}}
               <span class="caret"></span>
             </a>
@@ -148,7 +148,7 @@
         <!-- / Gas -->
 
         <!-- Advanced Option Panel -->
-        <div  ng-show="tx.sendMode==0">
+        <div ng-show="tx.sendMode==0">
           <a ng-click="toggleShowAdvance()">
             <p class="strong" translate="TRANS_advanced"> + Advanced: Add Data </p>
           </a>
@@ -171,9 +171,9 @@
 
         <div class="form-group" ng-show="showRaw">
           <label translate="SEND_raw"> Raw Transaction </label>
-          <textarea class="form-control" rows="4" disabled >{{rawTx}}</textarea>
+          <textarea class="form-control" rows="4" readonly >{{rawTx}}</textarea>
           <label translate="SEND_signed"> Signed Transaction </label>
-          <textarea class="form-control" rows="4" disabled >{{signedTx}}</textarea>
+          <textarea class="form-control" rows="4" readonly >{{signedTx}}</textarea>
         </div>
 
         <div class="form-group" ng-show="showRaw">
