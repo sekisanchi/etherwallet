@@ -4,30 +4,7 @@ var id = function() {}
 id.code = 'id';
 id.data = {
 
-  ERROR_22:             'Tidak dapat memperkirakan gas. Saldo di akun tidak cukup, atau alamat kontrak penerima bisa mengeluarkan error. Cobalah untuk secara manual mengatur gas dan melanjutkan. Keterangan Error saat pengiriman mungkin lebih informatif.',
-
-  /* Mnemonic Additions */
-  MNEM_1:               'Pilih alamat yang Anda inginkan untuk berinteraksi.',
-  MNEM_2:               'Satu frasa "HD mnemonic" dapat mengakses beberapa  dompet / alamat. Pilih alamat yang Anda inginkan untuk dipakai.',
-  MNEM_more:            'Tampilkan Alamat berikutnya',
-  MNEM_prev:            'Tampilkan Alamat sebelumnya',
-  x_Mnemonic:           '"Mnemonic Phrase" (MetaMask / Jaxx)',
-  ADD_Radio_5:          'Paste/Ketik Mnemonic Anda',
-  SEND_custom:          'Tambahkan "Custom Token"',
-  ERROR_21:             ' bukan ERC-20 token yang valid. Jika token lain sedang loading, hapus token ini dan coba lagi.',
-  TOKEN_show:           'Tampilkan Semua Token',
-  TOKEN_hide:           'Jangan tampilkan Token',
-  WARN_Send_Link:       'Alamat, jumlah, gas atau informasi telah diisikan untuk Anda. Informasi tersebut dapat Anda rubah sebelum pengiriman. Buka kunci dompet Anda Untuk memulai.',
-
-  /* Hardware wallets */
-  x_Ledger:             'Ledger Nano S',
-  ADD_Ledger_1:         'Hubungkan ke Ledger Nano S Anda',
-  ADD_Ledger_2:         'Buka Aplikasi Ethereum (atau aplikasi kontrak)',
-  ADD_Ledger_3:         'Periksa bahwa "Browser Support" sudah di aktifkan di "Settings"',
-  ADD_Ledger_4:         'Jika "Browser Support" tidak ditemukan di "Settings", pastikan sudah mengupdate ke [Firmware >1.2](https://www.ledgerwallet.com/apps/manager)',
-  ADD_Ledger_0a:        'Buka kembali MyEtherWallet melalui koneksi (SSL) yang aman',
-  ADD_Ledger_0b:        'Buka kembali MyEtherWallet menggunakan [Chrome](https://www.google.com/chrome/browser/desktop/) atau [Opera](https://www.opera.com/)',
-  ADD_Ledger_scan:      'Hubungkan ke Ledger Nano S',
+  WARN_Send_Link_2:     '**Warning:** You can only include data if you are sending via "ETH (Standard Transaction)". Please remove the "sendMode" and/or "tokenSymbol" from the URI to send a transaction with data.',
 
   /* Navigation*/
   NAV_YourWallets:      'Dompet Anda',
@@ -48,22 +25,24 @@ id.data = {
   NAV_Contact:          'Kontak',
 
   /* General */
-  x_Address:            'Alamat Anda',
   x_AddessDesc:         'Biasa dikenal dengan "Account #" atau "Public Key". Berikan alamat ini kepada yang ingin mengirim ether ke Anda. Icon yang ditampilkan di sampingnya memudahkan mengenal alamat Anda.',
+  x_Address:            'Alamat Anda',
   x_Cancel:             'Batal',
   x_CSV:                'File CSV (tidak ter-enkripsi)',
   x_Download:           'Unduh',
   x_Json:               'File JSON (tidak ter-enkripsi)',
   x_JsonDesc:           'Ini adalah "Private Key" Anda dalam format JSON yang tidak ter-enkripsi. Tidak diperlukan password dan siapapun yang memiliki JSON Anda dapat mengakses dompet dan Ether Anda tanpa password.',
-  x_Keystore:           'File Keystore (UTC / JSON · Format yang direkomendasikan · Ter-enkripsi · Format Mist)',
   x_Keystore2:          'File Keystore (UTC / JSON)',
+  x_Keystore:           'File Keystore (UTC / JSON · Format yang direkomendasikan · Ter-enkripsi · Format Mist)',
   x_KeystoreDesc:       'File Keystore ini sesuai dengan format yang dipakai Mist sehingga memudahkan untuk diimpor di kemudian hari. File ini yang disarankan untuk di unduh dan di backup.',
+  x_Ledger:             'Ledger Nano S',
+  x_Mnemonic:           '"Mnemonic Phrase" (MetaMask / Jaxx / ether.cards)',
   x_Password:           'Password',
   x_Print:              'Print Dompet Kertas',
   x_PrintDesc:          'ProTip: klik print dan simpan sebagai PDF jika Anda tidak memiliki printer!',
   x_PrintShort:         'Print',
-  x_PrivKey:            'Private Key (Tidak ter-enkripsi)',
   x_PrivKey2:           'Private Key',
+  x_PrivKey:            'Private Key (Tidak ter-enkripsi)',
   x_PrivKeyDesc:        'Ini adalah versi text yang tidak ter-enkripsi dan tidak memerlukan password. Jika file yang tidak ter-enkripsi ini sampai didapatkan orang lain, mereka dapat mengakses dompet Anda tanpa password. Oleh karenanya, sangat direkomendasikan untuk selalu memakai versi yang ter-enkripsi.',
   x_Save:               'Simpan',
   x_TXT:                'File TXT file (Tidak ter-enkripsi)',
@@ -107,6 +86,7 @@ id.data = {
   ADD_Radio_2_short:      'PILIH FILE DOMPET...',
   ADD_Radio_3:            'Paste/Ketik Private Key Anda',
   ADD_Radio_4:            'Tambah akun untuk dilihat',
+  ADD_Radio_5:          'Paste/Ketik Mnemonic Anda',
   ADD_Label_2:            'Buat Alias:',
   ADD_Label_3:            'File Dompet anda ter-enkripsi. Masukkan password: ',
   ADD_Label_4:            'Tambah akun untuk dilihat',
@@ -115,6 +95,21 @@ id.data = {
   ADD_Label_6:            'Unlock dompet: ',
   ADD_Label_6_short:      'Unlock',
   ADD_Label_7:            'Tambah Akun',
+
+  /* Mnemonic Additions */
+  MNEM_1:               'Pilih alamat yang Anda inginkan untuk berinteraksi.',
+  MNEM_2:               'Satu frasa "HD mnemonic" dapat mengakses beberapa  dompet / alamat. Pilih alamat yang Anda inginkan untuk dipakai.',
+  MNEM_more:            'Tampilkan Alamat berikutnya',
+  MNEM_prev:            'Tampilkan Alamat sebelumnya',
+
+  /* Hardware wallets */
+  ADD_Ledger_1:         'Hubungkan ke Ledger Nano S Anda',
+  ADD_Ledger_2:         'Buka Aplikasi Ethereum (atau aplikasi kontrak)',
+  ADD_Ledger_3:         'Periksa bahwa "Browser Support" sudah di aktifkan di "Settings"',
+  ADD_Ledger_4:         'Jika "Browser Support" tidak ditemukan di "Settings", pastikan sudah mengupdate ke [Firmware >1.2](https://www.ledgerwallet.com/apps/manager)',
+  ADD_Ledger_0a:        'Buka kembali MyEtherWallet melalui koneksi (SSL) yang aman',
+  ADD_Ledger_0b:        'Buka kembali MyEtherWallet menggunakan [Chrome](https://www.google.com/chrome/browser/desktop/) atau [Opera](https://www.opera.com/)',
+  ADD_Ledger_scan:      'Hubungkan ke Ledger Nano S',
 
   /* Generate Wallets */
   GEN_desc:               'Jika Anda memerlukan lebih dari satu dompet, Anda dapat memakai fitur : ',
@@ -135,7 +130,7 @@ id.data = {
   SEND_addr:             'Alamat tujuan: ',
   SEND_amount:           'Jumlah untuk dikirim: ',
   SEND_amount_short:     'Jumlah',
-  SEND_custom:           'Setting Lainnya',
+  SEND_custom:          'Tambahkan "Custom Token"',
   SEND_gas:              'Gas',
   SEND_TransferTotal:    'Kirim seluruh Saldo',
   SEND_generate:         'Laksanakan Transaksi',
@@ -155,6 +150,8 @@ id.data = {
   TOKEN_Addr:            'Alamat: ',
   TOKEN_Symbol:          'Simbol Token: ',
   TOKEN_Dec:             'Desimal: ',
+  TOKEN_show:           'Tampilkan Semua Token',
+  TOKEN_hide:           'Jangan tampilkan Token',
 
   /* Send Transaction */
   TRANS_desc:            'Untuk pengiriman Token, gunakan halaman "Kirim Token".',
@@ -277,12 +274,15 @@ id.data = {
   ERROR_18:            'Minimal harus ada 0.01 ether di akun untuk menutup biaya gas. Tambahkan ether dan coba lagi. ',
   ERROR_19:            'Semua gas akan digunakan pada transaksi ini. Ini berarti Anda telah memberikan suara pada proposal ini atau periode perdebatan telah berakhir.',
   ERROR_20:            'Simbol tidak valid',
+  ERROR_21:             ' bukan ERC-20 token yang valid. Jika token lain sedang loading, hapus token ini dan coba lagi.',
+  ERROR_22:             'Tidak dapat memperkirakan gas. Saldo di akun tidak cukup, atau alamat kontrak penerima bisa mengeluarkan error. Cobalah untuk secara manual mengatur gas dan melanjutkan. Keterangan Error saat pengiriman mungkin lebih informatif.',
   SUCCESS_1:           'Alamat valid',
   SUCCESS_2:           'Dompet telah ter-dekripsi',
   SUCCESS_3:           'Transaksi diajukan. TX ID: ',
   SUCCESS_4:           'Dompet Anda telah ditambahkan: ',
   SUCCESS_5:           'Anda telah berhasil melakukan voting. Terima kasih untuk menjadi peserta aktif dalam The DAO.',
   SUCCESS_6:           'File Terpilih: ',
+  WARN_Send_Link:       'Alamat, jumlah, gas atau informasi telah diisikan untuk Anda. Informasi tersebut dapat Anda rubah sebelum pengiriman. Buka kunci dompet Anda Untuk memulai.',
 
   /* Geth Error Messages */
   GETH_InvalidSender:      'Pengirim tidak valid',
@@ -563,9 +563,9 @@ id.data = {
   HELP_Sec_Desc_1:        'If one of your first questions is "Why should I trust these people?", that is a good thing. Hopefully the following will help ease your fears. ',
   HELP_Sec_Desc_2:        'We\'ve been up and running since August 2015. If you search for ["myetherwallet" on reddit](https://www.reddit.com/search?q=myetherwallet), you can see numerous people who use us with great success.',
   HELP_Sec_Desc_3:        'We aren\'t going to take your money or steal your private key(s). There is no malicious code on this site. In fact the "GENERATE WALLET" pages are completely client-side. That means that all the code is executed on ** your computer** and it is never saved and transmitted anywhere.',
-  HELP_Sec_Desc_4:        'Check the URL -- This site is being served through GitHub and you can see the source code here: [https://github.com/kvhnuke/etherwallet/tree/gh-pages](https://github.com/kvhnuke/etherwallet/tree/gh-pages) to the domains: [http://kvhnuke.github.io/etherwallet/](http://kvhnuke.github.io/etherwallet) and [https://www.myetherwallet.com](https://www.myetherwallet.com). You can verify it\'s hosted at GitHub by using [viewdns.info/dnsrecord/?domain=myetherwallet.com](http://viewdns.info/dnsrecord/?domain=myetherwallet.com") - last two A record IPs are owned by GitHub for their custom domain hosting.',
-  HELP_Sec_Desc_5:        'For generating wallets, you can download the [source code](https://github.com/kvhnuke/etherwallet/tree/gh-pages). See #5 above.',
-  HELP_Sec_Desc_6:        'Do a test run and check and see what network activity is happening. The easiest way for you to do this is to right click on the page and click "inspect element". Go to the "Network" tab. Generate a test wallet. You will see there is no network activity. You may see something happening that looks like data:image/gif and data:image/png. Those are the QR codes being generated...on your computer...by your computer. No bytes were transferred.',
+  HELP_Sec_Desc_4:        'Check the URL -- This site is being served through GitHub and you can see the source code here: [https://github.com/kvhnuke/etherwallet/tree/gh-pages](https://github.com/kvhnuke/etherwallet/tree/gh-pages) to [https://www.myetherwallet.com](https://www.myetherwallet.com).',
+  HELP_Sec_Desc_5:        'For generating wallets, you can download the [source code and run it locally](https://github.com/kvhnuke/etherwallet/releases/latest). See #5 above.',
+  HELP_Sec_Desc_6:        'Generate a test wallet and check and see what network activity is happening. The easiest way for you to do this is to right click on the page and click "inspect element". Go to the "Network" tab. Generate a test wallet. You will see there is no network activity. You may see something happening that looks like data:image/gif and data:image/png. Those are the QR codes being generated...on your computer...by your computer. No bytes were transferred.',
   HELP_Sec_Desc_7:        'Now, to be safe, move over to the "Resources" page. Here you can see all the different elements that make up a website. If you click through Local Storage, Cookies, and Cache, you will see nothing is being stored. Nothing is being saved. Refresh the page and you are back to square one.',
   HELP_Sec_Desc_8:        'If you do not feel comfortable using this tool, then by all means, do not use it. We created this tool as a helpful way for people to generate wallets and make transactions without needing to dive into command line or run a full node. Again, feel free to reach out if you have concerns and we will respond as quickly as possible. Thanks! ',
 

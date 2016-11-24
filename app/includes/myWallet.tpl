@@ -21,7 +21,7 @@
     <tbody>
       <tr ng-repeat="twallet in allWallets track by $index">
         <td>{{$index+1}}</td>
-        <td><div id="addressIdenticon" class="med" title="Address Indenticon" blockie-address="{{twallet.addr}}" watch-var="wallet"></div></td>
+        <td><div id="addressIdenticon" class="med" title="Address Indenticon" blockie-address="{{twallet.addr}}" watch-var="twallet"></div></td>
         <td>
           {{twallet.nick}} <br />
           <span class="mono small">{{twallet.addr}}</span>
@@ -66,7 +66,7 @@
       <tbody>
         <tr ng-repeat="twallet in allWatchOnly track by $index">
           <td>{{$index+1}}</td>
-          <td><div id="addressIdenticon" class="med" title="Address Indenticon" blockie-address="{{twallet.addr}}" watch-var="wallet"></div></td>
+          <td><div id="addressIdenticon" class="med" title="Address Indenticon" blockie-address="{{twallet.addr}}" watch-var="twallet"></div></td>
           <td>
             {{twallet.nick}}
             <br />
@@ -228,7 +228,7 @@
           <form role="form">
             <div class="form-group">
               <label for="walletName" translate="MYWAL_Name">Wallet Name</label>
-              <input type="text" class="form-control" value="" ng-model="viewWallet.nick"/>
+              <input type="text" class="form-control" value="" ng-model="viewWallet.nick" ng-keyup="$event.keyCode == 13 && editSave()"/>
             </div>
           </form>
         </div>
@@ -260,7 +260,7 @@
             <div class="form-group">
               <label for="walletName" translate="ADD_Label_3">Your file is encrypted. Please enter the password: </label>
               <div class="input-group">
-                <input type="{{showPass && 'password' || 'text'}}" class="form-control" ng-model="password" />
+                <input type="{{showPass && 'password' || 'text'}}" class="form-control" ng-model="password" ng-keyup="$event.keyCode == 13 && decryptWallet()" />
                 <span class="input-group-addon eye" ng-click="showPass=!showPass"></span>
               </div>
               <div ng-bind-html="viewStatus"></div>

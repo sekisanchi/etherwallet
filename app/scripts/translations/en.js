@@ -4,8 +4,6 @@ var en = function() {}
 en.code = 'en';
 en.data = {
 
-  ERROR_22:             'Could not estimate gas. There are not enough funds in the account, or the receiving contract address would throw an error. Feel free to manually set the gas and proceed. The error message upon sending may be more informative.',
-
   /* Navigation*/
   NAV_YourWallets:      'Your Wallets',
   NAV_AddWallet:        'Add Wallet',
@@ -35,7 +33,7 @@ en.data = {
   x_Keystore:           'Keystore File (UTC / JSON · Recommended · Encrypted · Mist Format)',
   x_Keystore2:          'Keystore File (UTC / JSON)',
   x_KeystoreDesc:       'This Keystore file matches the format used by Mist so you can easily import it in the future. It is the recommended file to download and back up.',
-  x_Mnemonic:           'Mnemonic Phrase (MetaMask / Jaxx)',
+  x_Mnemonic:           'Mnemonic Phrase (MetaMask / Jaxx / ether.cards)',
   x_Password:           'Password',
   x_Print:              'Print Paper Wallet',
   x_PrintDesc:          'ProTip: Click print and save this as a PDF, even if you do not own a printer!',
@@ -275,6 +273,7 @@ en.data = {
   ERROR_19:             'All gas would be used on this transaction. This means you have already voted on this proposal or the debate period has ended.',
   ERROR_20:             'Invalid symbol',
   ERROR_21:             'Not a valid ERC-20 token',
+  ERROR_22:             'Could not estimate gas. There are not enough funds in the account, or the receiving contract address would throw an error. Feel free to manually set the gas and proceed. The error message upon sending may be more informative.',
   SUCCESS_1:            'Valid address',
   SUCCESS_2:            'Wallet successfully decrypted',
   SUCCESS_3:            'Transaction submitted. TX ID: ',
@@ -282,7 +281,8 @@ en.data = {
   SUCCESS_5:            'You have successfully voted. Thank you for being an active participant in The DAO.',
   SUCCESS_6:            'File Selected: ',
 
-  WARN_Send_Link:       'You arrived via a link that has the address, amount, gas or data fields filled in for you. You can change any information before sending. Unlock your wallet to get started.',
+  WARN_Send_Link:       'You arrived via a link that has the address, value, gas, data fields, or transaction type (send mode) filled in for you. You can change any information before sending. Unlock your wallet to get started.',
+  WARN_Send_Link_2:     '**Warning:** You can only include data if you are sending via "ETH (Standard Transaction)". Please remove the "sendMode" and/or "tokenSymbol" from the URI to send a transaction with data.',
 
   /* Geth Error Messages */
   GETH_InvalidSender:      'Invalid sender',
@@ -563,9 +563,9 @@ en.data = {
   HELP_Sec_Desc_1:        'If one of your first questions is "Why should I trust these people?", that is a good thing. Hopefully the following will help ease your fears. ',
   HELP_Sec_Desc_2:        'We\'ve been up and running since August 2015. If you search for ["myetherwallet" on reddit](https://www.reddit.com/search?q=myetherwallet), you can see numerous people who use us with great success.',
   HELP_Sec_Desc_3:        'We aren\'t going to take your money or steal your private key(s). There is no malicious code on this site. In fact the "GENERATE WALLET" pages are completely client-side. That means that all the code is executed on ** your computer** and it is never saved and transmitted anywhere.',
-  HELP_Sec_Desc_4:        'Check the URL -- This site is being served through GitHub and you can see the source code here: [https://github.com/kvhnuke/etherwallet/tree/gh-pages](https://github.com/kvhnuke/etherwallet/tree/gh-pages) to the domains: [http://kvhnuke.github.io/etherwallet/](http://kvhnuke.github.io/etherwallet) and [https://www.myetherwallet.com](https://www.myetherwallet.com). You can verify it\'s hosted at GitHub by using [viewdns.info/dnsrecord/?domain=myetherwallet.com](http://viewdns.info/dnsrecord/?domain=myetherwallet.com") - last two A record IPs are owned by GitHub for their custom domain hosting.',
-  HELP_Sec_Desc_5:        'For generating wallets, you can download the [source code](https://github.com/kvhnuke/etherwallet/tree/gh-pages). See #5 above.',
-  HELP_Sec_Desc_6:        'Do a test run and check and see what network activity is happening. The easiest way for you to do this is to right click on the page and click "inspect element". Go to the "Network" tab. Generate a test wallet. You will see there is no network activity. You may see something happening that looks like data:image/gif and data:image/png. Those are the QR codes being generated...on your computer...by your computer. No bytes were transferred.',
+  HELP_Sec_Desc_4:        'Check the URL -- This site is being served through GitHub and you can see the source code here: [https://github.com/kvhnuke/etherwallet/tree/gh-pages](https://github.com/kvhnuke/etherwallet/tree/gh-pages) to [https://www.myetherwallet.com](https://www.myetherwallet.com).',
+  HELP_Sec_Desc_5:        'For generating wallets, you can download the [source code and run it locally](https://github.com/kvhnuke/etherwallet/releases/latest). See #5 above.',
+  HELP_Sec_Desc_6:        'Generate a test wallet and check and see what network activity is happening. The easiest way for you to do this is to right click on the page and click "inspect element". Go to the "Network" tab. Generate a test wallet. You will see there is no network activity. You may see something happening that looks like data:image/gif and data:image/png. Those are the QR codes being generated...on your computer...by your computer. No bytes were transferred.',
   HELP_Sec_Desc_7:        'Now, to be safe, move over to the "Resources" page. Here you can see all the different elements that make up a website. If you click through Local Storage, Cookies, and Cache, you will see nothing is being stored. Nothing is being saved. Refresh the page and you are back to square one.',
   HELP_Sec_Desc_8:        'If you do not feel comfortable using this tool, then by all means, do not use it. We created this tool as a helpful way for people to generate wallets and make transactions without needing to dive into command line or run a full node. Again, feel free to reach out if you have concerns and we will respond as quickly as possible. Thanks! ',
 

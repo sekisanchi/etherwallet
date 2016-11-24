@@ -1,12 +1,11 @@
 ## Website: https://www.MyEtherWallet.com
 ## Chrome Extension: https://chrome.google.com/webstore/detail/myetherwallet-cx/nlbmnnijcnlegkjjpcfjclmcfggfefdm
-## Download the Latest Release: github.com/kvhnuke/etherwallet/releases/latest
-    * dist-vX.X.X.X.zip is the smaller package containing the gh-pages branch aka MyEtherWallet.com
-    * chrome-extension-vX.X.X.X.zip is the chrome extension package
-    * source code is the full source for developers to get started with (although cloning or forking the mercury branch is probably a better choice)
+## Download the Latest Release: https://github.com/kvhnuke/etherwallet/releases/tag/v0.3.2.3
+- dist-vX.X.X.X.zip is the smaller package containing the gh-pages branch aka MyEtherWallet.com
+- chrome-extension-vX.X.X.X.zip is the chrome extension package
+- source code is the full source for developers to get started with (although cloning or forking the mercury branch is probably a better choice)
 
-Content of MyEtherWallet.com is served from github.
-
+Content of MyEtherWallet.com is served directly from this Github (gh-pages) via Cloudflare (for SSL and DDOS protection).
 
 
 
@@ -17,12 +16,21 @@ Content of MyEtherWallet.com is served from github.
 MyEtherWallet is an open source, javascript, client-side tool for generating Ether wallets. It was created and is maintained by [kvhnuke](https://github.com/kvhnuke) and [tayvano](https://github.com/tayvano) aka [insomniasexx](https://www.reddit.com/user/insomniasexx).
 
 - Generate Wallets completely client side.
-- Unlock variety of key types: raw private key, encrypted private key, keystore file, mnemonics, hardware wallets.
-- Easily send Ether and Tokens (ERC-20 tokens)
-- Send "Only ETH" or "Only ETC" to ensure they are not victim of replay attacks.
+- Unlock variety of key types: raw private key, encrypted private key, keystore file, mnemonics, Ledger Nano S hardware wallet.
+- Easily send Ether and *any* ERC-20 Standard Token. Many tokens included as default: DGD, GNT, ICN, MKR, PLU, REP, SNGLS, and more.
+- Send "Only ETH" or "Only ETC" to ensure you are not victim of replay attacks.
 - Generate and send offline transactions, ensuring your private keys never touch an internet-connected device.
-- Include recommended address, amount, gas limit, and data via URL.
-    - ie: https://www.myetherwallet.com/?gaslimit=21000&to=0x7cB57B5A97eAbe94205C07890BE4c1aD31E486A8&value=0.5#send-transaction
+- Securely access your ETH & Tokens on your [Ledger Nano S](http://support.ledgerwallet.com/knowledge_base/topics/how-to-use-myetherwallet-with-your-nano-s) via the MyEtherWallet interface (Chrome & Opera natively, Firefox w/ [add-on](https://addons.mozilla.org/en-US/firefox/addon/u2f-support-add-on/))
+- Now in 18 languages thanks 100% to the amazing Ethereum community.
+- Supports URI Strings on Send Transaction Page. [Read More.](https://github.com/kvhnuke/etherwallet/issues/283#issuecomment-261849895)
+    - to=[address]
+    - value=[number]
+    - sendMode=[0 | 1 | 2 | 4] *(0 is ETH (Standard Transaction) | 1 is Only ETH | 2 is only ETC | 4 is token)
+    - tokenSymbol=[ARC | ICN | MKR | ....]
+    - gasLimit=[number] OR gas=[number]
+    - data=[hex data]
+    - Example 1: https://www.myetherwallet.com/?to=0x7cB57B5A97eAbe94205C07890BE4c1aD31E486A8&value=1&tokenSymbol=REP&gaslimit=50000#send-transaction
+    - Example 2: https://www.myetherwallet.com/?to=0x7cB57B5A97eAbe94205C07890BE4c1aD31E486A8&value=1&gaslimit=23000&data=0x5468616e6b20796f752c204d455720322e30#send-transaction
 
 **Goals**
 

@@ -1,11 +1,11 @@
 // Italian
-// Last sync with en.js: commit cd58648be07d84435d6e917d5a1b3eb8a3814207
+// Last sync with en.js: commit a80dd24a9e7922fdbbe174de0f352ee858245430
 'use strict';
 var it = function() {}
 it.code = 'it';
 it.data = {
 
-  ERROR_22:             'Impossibile eseguire una stima del gas necessario. Non ci sono abbastanza fondi nel conto, oppure l\'indirizzo del contratto ricevente genererebbe un errore. Puoi inserire il gas manualmente e procedere. Il messaggio di errore al momento dell\'invio potrebbe contenere ulteriori informazioni.',
+  WARN_Send_Link_2:     '**Attenzione:** Puoi includere dati solamente se invii tramite "ETH (transazione standard)". Rimuovi i parametri "sendMode" e/o "tokenSymbol" dall\'URI per inviare una transazione con dati.',
 
   /* Navigation*/
   NAV_YourWallets:      'I tuoi portafogli',
@@ -38,7 +38,7 @@ it.data = {
   x_Keystore:           'File Keystore (UTC / JSON · Consigliato · Crittografato · Formato Mist)',
   x_Keystore2:          'File Keystore (UTC / JSON)',
   x_KeystoreDesc:       'Questo file Keystore è compatibile con il formato usato da Mist, in modo da poterlo facilmente importare in futuro. È il file consigliato da scaricare e conservare.',
-  x_Mnemonic:           'Frase mnemonica (MetaMask / Jaxx)',
+  x_Mnemonic:           'Frase mnemonica (MetaMask / Jaxx / ether.cards)',
   x_Json:               'File JSON (non crittografato)',
   x_JsonDesc:           'Questa è la tua chiave privata in formato JSON non crittografato. Significa che non hai bisogno della password, ma chiunque trovi questo file JSON potrà avere accesso al tuo portafoglio e ai tuoi ether senza password.',
   x_PrintShort:         'Stampa',
@@ -146,7 +146,7 @@ it.data = {
   TRANS_etc:             'Solo ETC',
   TRANS_advanced:        '+Avanzate: aggiungi dati ',
   TRANS_data:            'Dati: ',
-  TRANS_gas:             'Gas Limit: ',
+  TRANS_gas:             'Limite gas: ',
   TRANS_sendInfo:        'Una transazione standard che utilizza 21000 gas costerà 0,000441 ETH. Utilizziamo un prezzo del gas leggermente al di sopra del minimo pari a 0,000000021 ETH per assicurarci che venga elaborata velocemente. Noi non prendiamo commissioni.',
 
   /* Send Transaction Modals */
@@ -276,6 +276,7 @@ it.data = {
   ERROR_19:             'Questa transazione consumerebbe tutto il gas. Ciò significa che hai già votato questa proposta o che il periodo di discussione è terminato.',
   ERROR_20:             'Simbolo non valido',
   ERROR_21:             'Non è un token ERC-20 valido.',
+  ERROR_22:             'Impossibile eseguire una stima del gas necessario. Non ci sono abbastanza fondi nel conto, oppure l\'indirizzo del contratto ricevente genererebbe un errore. Puoi inserire il gas manualmente e procedere. Il messaggio di errore al momento dell\'invio potrebbe contenere ulteriori informazioni.',
   SUCCESS_1:            'Indirizzo valido',
   SUCCESS_2:            'Portafoglio decodificato correttamente',
   SUCCESS_3:            'Transazione inviata. TX ID: ',
@@ -283,7 +284,7 @@ it.data = {
   SUCCESS_5:            'Hai votato con successo. Grazie per essere un partecipante attivo in The DAO.',
   SUCCESS_6:            'File selezionato: ',
 
-  WARN_Send_Link:       'Sei arrivato qui da un link che ha riempito per te i campi indirizzo, importo, gas o dati. Puoi cambiare queste informazioni prima di inviare. Sblocca il tuo portafoglio per iniziare.',
+  WARN_Send_Link:       'Sei arrivato qui da un link che ha riempito per te i campi indirizzo, importo, gas, dati o tipo di transazione (modalità di invio). Puoi cambiare queste informazioni prima di inviare. Sblocca il tuo portafoglio per iniziare.',
 
   /* Geth Error Messages */
   GETH_InvalidSender:      'Mittente non valido',
@@ -356,7 +357,7 @@ it.data = {
   HELP_2a_Desc_6:      'Ricorda, devi evitare la perdita delle chiavi e della password in caso di smarrimento o malfunzionamento del tuo hard disk, penna USB, o pezzo di carta. Devi anche considerare la perdita fisica o il danneggiamento di una intera area (pensa a incendi o inondazioni).',
 
   HELP_2b_Title:       '2b) Come implemento un portafoglio offline in maniera sicura con MyEtherWallet?',
-  HELP_2b_Desc_1:      'Vai sul nostro github: [https://github.com/kvhnuke/etherwallet/releases/latest](https://github.com/kvhnuke/etherwallet/releases/latest).',
+  HELP_2b_Desc_1:      'Vai su [https://github.com/kvhnuke/etherwallet/releases/latest](https://github.com/kvhnuke/etherwallet/releases/latest).',
   HELP_2b_Desc_2:      'Fai clic su `dist-vX.X.X.X.zip`.',
   HELP_2b_Desc_3:      'Sposta il file zip su un computer *air-gapped*.',
   HELP_2b_Desc_4:      'Decomprimilo e fai doppio clic su `index.html`.',
@@ -411,7 +412,7 @@ it.data = {
   HELP_5_Desc_9:        'Dal momento che stiamo costantemente aggiornando MyEtherWallet.com, ti consigliamo di aggiornare periodicamente la tua versione locale del repository.',
 
   HELP_5CX_Title:       '5) Come posso installare questa estensione dal repository invece che dal Chrome Store? ',
-  HELP_5CX_Desc_2:      'Fai clic su `chrome-extension-vX.X.X.X.zip`.',
+  HELP_5CX_Desc_2:      'Fai clic su `chrome-extension-vX.X.X.X.zip` e decomprimi il file.',
   HELP_5CX_Desc_3:      'In Google Chrome, fai clic su Impostazioni (dal menu in alto a destra).',
   HELP_5CX_Desc_4:      'Fai clic su "Estensioni" sulla sinistra.',
   HELP_5CX_Desc_5:      'Seleziona la casella "Modalità sviluppatore" all\'inizio della pagina.',
@@ -564,9 +565,9 @@ it.data = {
   HELP_Sec_Desc_1:        'Se una delle prime domande che ti poni è "Perché dovrei fidarmi di questa gente?", è una cosa buona. Quanto segue dovrebbe aiutarti a calmare i tuoi timori. ',
   HELP_Sec_Desc_2:        'Siamo attivi da agosto 2015. Se cerchi ["myetherwallet" su reddit](https://www.reddit.com/search?q=myetherwallet), puoi vedere che molte persone ci utilizzano con grande successo.',
   HELP_Sec_Desc_3:        'Non prenderemo i tuoi soldi né ruberemo le tue chiavi private. Non c\'è codice malevolo su questo sito. Infatti le pagine "Genera portafoglio" sono completamente lato client. Ciò significa che tutto il codice è eseguito sul ** tuo computer** e non viene mai salvato e trasmesso da nessuna parte.',
-  HELP_Sec_Desc_4:        'Controlla l\'URL -- Questo sito viene servito attraverso GitHub e puoi vederne il codice sorgente qui: [https://github.com/kvhnuke/etherwallet/tree/gh-pages](https://github.com/kvhnuke/etherwallet/tree/gh-pages) sui domini: [http://kvhnuke.github.io/etherwallet/](http://kvhnuke.github.io/etherwallet) e [https://www.myetherwallet.com](https://www.myetherwallet.com). Puoi verificare che sia ospitato su GitHub utilizzando [viewdns.info/dnsrecord/?domain=myetherwallet.com](http://viewdns.info/dnsrecord/?domain=myetherwallet.com") - gli IP degli ultimi due record A sono posseduti da GitHub per il loro hosting dei domini personalizzati.',
-  HELP_Sec_Desc_5:        'Per la generazione dei portafogli, puoi scaricare il [codice sorgente](https://github.com/kvhnuke/etherwallet/tree/gh-pages). Vedi la domanda 5 qui sopra.',
-  HELP_Sec_Desc_6:        'Fai una prova e controlla che attività di rete sono in corso. Il modo più facile e fare clic destro sulla pagina e scegliere "Analizza elemento". Vai sulla scheda "Rete". Genera un portafoglio di prova. Vedrai che non c\'è attività di rete. Potresti vedere accadere qualcosa che assomiglia a  data:image/gif e data:image/png. Sono i QR code che vengono generati...sul tuo computer...dal tuo computer. Non sono stati trasferiti byte.',
+  HELP_Sec_Desc_4:        'Controlla l\'URL -- Questo sito viene servito attraverso GitHub e puoi vederne il codice sorgente qui: [https://github.com/kvhnuke/etherwallet/tree/gh-pages](https://github.com/kvhnuke/etherwallet/tree/gh-pages) su [https://www.myetherwallet.com](https://www.myetherwallet.com).',
+  HELP_Sec_Desc_5:        'Per la generazione dei portafogli, puoi scaricare il [codice sorgente](https://github.com/kvhnuke/etherwallet/releases/latest) ed eseguirlo in locale. Vedi la domanda 5 qui sopra.',
+  HELP_Sec_Desc_6:        'Genera un portafoglio di prova e controlla che attività di rete sono in corso. Il modo più facile e fare clic destro sulla pagina e scegliere "Analizza elemento". Vai sulla scheda "Rete". Genera un portafoglio di prova. Vedrai che non c\'è attività di rete. Potresti vedere accadere qualcosa che assomiglia a  data:image/gif e data:image/png. Sono i QR code che vengono generati...sul tuo computer...dal tuo computer. Non sono stati trasferiti byte.',
   HELP_Sec_Desc_7:        'Ora, per essere sicuro, vai alla scheda "Archiviazione". Qui puoi vedere tutti i diversi elementi che costituiscono un sito web. Se controlli Archiviazione locale, Cookie, e Archiviazione cache, vedrai che non c\'è nulla che viene memorizzato. Non viene salvato niente. Se ricarichi la pagina ricominci da capo.',
   HELP_Sec_Desc_8:        'Se non ti senti a tuo agio a usare questo strumento, allora certo, non usarlo. Abbiamo creato questo strumento per aiutare la gente a generare portafogli ed eseguire transazioni senza bisogno di usare la riga di comando o far girare un nodo completo. Di nuovo, sentiti libero di contattarci se hai dubbi e ti risponderemo appena possibile. Grazie! ',
 

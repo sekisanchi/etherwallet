@@ -4,7 +4,8 @@ var vi = function() {}
 vi.code = 'vi';
 vi.data = {
 
-  WARN_Send_Link:       'You arrived via a link that has the address, amount, gas or data fields filled in for you. You can change any information before sending. Unlock your wallet to get started.',
+  WARN_Send_Link:       'You arrived via a link that has the address, value, gas, data fields, or transaction type (send mode) filled in for you. You can change any information before sending. Unlock your wallet to get started.',
+  WARN_Send_Link_2:     '**Warning:** You can only include data if you are sending via "ETH (Standard Transaction)". Please remove the "sendMode" and/or "tokenSymbol" from the URI to send a transaction with data.',
   ERROR_22:             'Could not estimate gas. There are not enough funds in the account, or the receiving contract address would throw an error. Feel free to manually set the gas and proceed. The error message upon sending may be more informative.',
 
   /* Hardware wallets */
@@ -46,7 +47,7 @@ vi.data = {
   x_Keystore:           'Định Dạng Keystore (UTC / JSON) (Đã mã hoá. Định Dạng này sử dụng cho Mist)',
   x_Keystore2:          'Định Dạng Keystore (UTC / JSON)',
   x_KeystoreDesc:       'Định dạng Keystore là tập một tin chứa dữ liệu ví đã được mã hoá của Private Key và sử dụng cho Mist. Do đó bạn có thể dễ dàng bỏ nó vào bên trong Mist và tiếp tục sử dụng ví của bạn. Đây là một tập tin được đề xuất nhằm sao lưu dữ liệu ví cá nhân.',
-  x_Mnemonic:           'Cụm từ dễ nhớ (MetaMask / Jaxx)',
+  x_Mnemonic:           'Cụm từ dễ nhớ (MetaMask / Jaxx / ether.cards)',
   x_Password:           'Mật Khẩu',
   x_Print:              'Tạo Ví Giấy',
   x_PrintDesc:          'Mẹo: kích chuột trái vào nút "In Ví" sau đó chọn "Save this as a PDF" đễ lưu nó thành định dạng PDF trên máy tính của bạn nếu bạn không sở hữu máy in cá nhân!',
@@ -562,8 +563,8 @@ vi.data = {
   HELP_Sec_Desc_1:        'Nếu câu hỏi đầu tiên mà bạn đặt ra đó là "Vì sao tôi phải tin vào những người tạo ra trang này?", thì đó là một câu hỏi tốt. Hi vọng rằng những thông tin sau đây sẽ làm giảm bớt sự lo ngại từ phía bạn. ',
   HELP_Sec_Desc_2:        'Chúng tôi đã bất đầu đưa trang của chúng tôi ra thị trường vào tháng 8 năm 2015. Nếu bạn tìm kiếm trên nguồn ["myetherwallet" tại reddit](https://www.reddit.com/search?q=myetherwallet), bạn sẽ thấy được lượng người hiện tại đang sử dụng và sự thành công của trang myetherwallet.',
   HELP_Sec_Desc_3:        'Chúng tôi không dùng trang này nhằm mục đích sử dụng tiền của bạn hoặc đánh cắp các Private key của bạn. Và trên trang của chúng tôi hoàn toàn không xuất hiện mã độc. Trong thực tế tại trang "Tạo Ví" là hoàn toàn được thực hiện từ người sử dụng. Việc này có nghĩa tất cả các đoạn mã và mật khẩu sẽ được thực hiện hoàn toàn trên **Máy tính cá nhân của bạn** và nó hoàn toàn không lưu lại hoặc chuyển đi bất cứ một dữ liệu nào ra khỏi máy tính của bạn.',
-  HELP_Sec_Desc_4:        'Hãy kiễm tra URL -- Trang của chúng tôi được cung cấp thông qua Github và bạn có thể kiễm tra lại toàn bộ mã nguồn ở đây: [https://github.com/kvhnuke/etherwallet/tree/gh-pages](https://github.com/kvhnuke/etherwallet/tree/gh-pages) đến các tên miền: [http://kvhnuke.github.io/etherwallet/](http://kvhnuke.github.io/etherwallet) và [https://www.myetherwallet.com](https://www.myetherwallet.com). Bạn có thể xác minh nó được lưu trữ hoàn toàn tại Github thong qua trang [viewdns.info/dnsrecord/?domain=myetherwallet.com](http://viewdns.info/dnsrecord/?domain=myetherwallet.com") - sẽ có hai hồ sơ IP duy nhất đươc sở hữu bởi Github tại kho lưu trữ những tên miền tuỳ biến .',
-  HELP_Sec_Desc_5:        'Đối với việc khởi tạo Ví, bạn có thể tải về [Mã nguồn](https://github.com/kvhnuke/etherwallet/tree/gh-pages). Xem phần #5 phía trên.',
+  HELP_Sec_Desc_4:        'Hãy kiễm tra URL -- Trang của chúng tôi được cung cấp thông qua Github và bạn có thể kiễm tra lại toàn bộ mã nguồn ở đây: [https://github.com/kvhnuke/etherwallet/tree/gh-pages](https://github.com/kvhnuke/etherwallet/tree/gh-pages) đến các tên miền: [https://www.myetherwallet.com](https://www.myetherwallet.com).',
+  HELP_Sec_Desc_5:        'Đối với việc khởi tạo Ví, bạn có thể tải về [Mã nguồn](https://github.com/kvhnuke/etherwallet/releases/latest). Xem phần #5 phía trên.',
   HELP_Sec_Desc_6:        'Bạn hãy cho chạy thử đễ kiễm tra lại toàn bộ hoạt động của nó. Cách đơn giản nhất đễ bạn kiễm tra là nhấn chuột phải vào trang của chúng tôi vào chọn mục "inspect element". đi đến mục "Network". Khởi tạo thử một Ví. Lúc này bạn sẽ thấy được các hoạt động của hệ thống sẽ diễn ra như thế nào. Bạn sẽ thấy được dữ liệu sau: image/gif và image/png. Nó chính là mã QR đã được khởi tạo...trên máy tính của bạn. Và không có một dung lượng dữ liệu nào được chuyển ra khỏi máy của bạn.',
   HELP_Sec_Desc_7:        'Bây giờ, cẩn thận hơn, hãy đến phần "Resources" của trang. Tại đây bạn sẽ thấy rõ toàn bộ những cấu tạo khác khác nhau trong việc hình thành và xây dựng lên một trang web. Nếu bạn chọn phần Local Storage, Cookies, and Cache, bạn sẽ thấy thực ra không có gì được lưu trữ. Và hoàn toàn không có gì được sao chép. Khi Refresh trang web, bạn sẽ quay về lại tình trạng ban đầu lức vừa mới truy cập.',
   HELP_Sec_Desc_8:        'Nếu bạn cảm thấy không an tâm khi sử dụng công cụ của chúng tôi, bạn có quyền không sử dụng nó. Chúng tôi tạo ra ứng dụng này nhằm giúp người sử dụng dễ dàng tạo Ví mới và lập giao dịch mà không cần dùng đến những câu lệnh trên Terminal hoặc tải về đầy đủ các node. Một lần nữa xin nhắc lại, bạn hoàn toàn có thể ngưng sử dụng và báo lại với chúng tôi nếu bạn có một mối quan ngại nào đó, chúng tôi sẽ chịu trách nhiệm chỉnh sửa hoặc giải đáp thắc mắc từ nơi bạn một cách sớm nhất có thể. Xin Chân Thành Cảm Ơn! ',

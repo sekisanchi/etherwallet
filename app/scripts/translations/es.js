@@ -5,6 +5,7 @@ es.code = 'es';
 es.data = {
 
   ERROR_22:             'Could not estimate gas. There are not enough funds in the account, or the receiving contract address would throw an error. Feel free to manually set the gas and proceed. The error message upon sending may be more informative.',
+  WARN_Send_Link_2:     '**Warning:** You can only include data if you are sending via "ETH (Standard Transaction)". Please remove the "sendMode" and/or "tokenSymbol" from the URI to send a transaction with data.',
 
   NAV_DeployContract:  'Deploy Contract',
 
@@ -13,13 +14,13 @@ es.data = {
   MNEM_2:               'Your single HD mnemonic phrase can access a number of wallets / addresses. Please select the address you would like to interact with at this time.',
   MNEM_more:            'More Addresses',
   MNEM_prev:            'Previous Addresses',
-  x_Mnemonic:           'Mnemonic Phrase (MetaMask / Jaxx)',
+  x_Mnemonic:           'Mnemonic Phrase (MetaMask / Jaxx / ether.cards)',
   ADD_Radio_5:          'Paste/Type Your Mnemonic',
   SEND_custom:          'Add Custom Token',
   ERROR_21:             ' is not a valid ERC-20 token. If other tokens are loading, please remove this token and try again.',
   TOKEN_show:           'Show All Tokens',
   TOKEN_hide:           'Hide Tokens',
-  WARN_Send_Link:       'You arrived via a link that has the address, amount, gas or data fields filled in for you. You can change any information before sending. Unlock your wallet to get started.',
+  WARN_Send_Link:       'You arrived via a link that has the address, value, gas, data fields, or transaction type (send mode) filled in for you. You can change any information before sending. Unlock your wallet to get started.',
 
   /* Hardware wallets */
   x_Ledger:             'Ledger Nano S',
@@ -564,8 +565,8 @@ es.data = {
   HELP_Sec_Desc_1:        'Si una de tus primeras preguntas es "¿Por qué debería confiar en estas personas?, se trata de algo bueno. Esperamos que lo que sigue te sirva de ayuda para disminuir tus preocupaciones. ',
   HELP_Sec_Desc_2:        'Hemos estado funcionando desde agosto de 2015. Si buscas ["myetherwallet" en reddit](https://www.reddit.com/search?q=myetherwallet), puedes encontrar numerosas personas que nos utilizan con gran éxito.',
   HELP_Sec_Desc_3:        'No vamos a quitarte tu dinero ni a robar tus claves privadas. No hay código malicioso en este sitio. De hecho, las páginas "Generar Cartera" se ejecutan por completo en el cliente. Esto significa que todo el código se ejecuta en ** tu ordenador** y nunca se graba o se transmite a ningún lugar.',
-  HELP_Sec_Desc_4:        'Comprueba la URL -- Este sitio se sirve a través de GitHub y puedes ver el código fuente aquí: [https://github.com/kvhnuke/etherwallet/tree/gh-pages](https://github.com/kvhnuke/etherwallet/tree/gh-pages) a los dominios: [http://kvhnuke.github.io/etherwallet/](http://kvhnuke.github.io/etherwallet) and [https://www.myetherwallet.com](https://www.myetherwallet.com). Puedes verificar que está alojado en GitHub utilizando [viewdns.info/dnsrecord/?domain=myetherwallet.com](http://viewdns.info/dnsrecord/?domain=myetherwallet.com") - las direcciones IP de los dos últimos registros A son propiedad de GitHub y las utilizan para su alojamiento de dominios personalizados.',
-  HELP_Sec_Desc_5:        'Para generar carteras, puedes descargar el [código fuente](https://github.com/kvhnuke/etherwallet/tree/gh-pages). Ver #5 más arriba.',
+  HELP_Sec_Desc_4:        'Comprueba la URL -- Este sitio se sirve a través de GitHub y puedes ver el código fuente aquí: [https://github.com/kvhnuke/etherwallet/tree/gh-pages](https://github.com/kvhnuke/etherwallet/tree/gh-pages) a [https://www.myetherwallet.com](https://www.myetherwallet.com).',
+  HELP_Sec_Desc_5:        'Para generar carteras, puedes descargar el [código fuente](https://github.com/kvhnuke/etherwallet/releases/latest). Ver #5 más arriba.',
   HELP_Sec_Desc_6:        'Haz una prueba y observa qué actividad de red ocurre. La manera más fácil de hacer esto es hacer clic con el botón derecho en la página y hacer clic en "inspeccionar elemento". Ve a la pestaña "Red". Genera una cartera de prueba. Verás que no hay actividad de red. Puede que veas algo que aparece como data:image/gif y data:image/png. Se trata de los códigos QR generándose en tu ordenador y por tu ordenador. No se ha transferido ni un solo byte.',
   HELP_Sec_Desc_7:        'Ahora, si quieres asegurarte, ve a la página "Recursos". Aquí puedes ver los diferentes elementos que conforman un sitio web. Si haces clic en Almacenamiento local, Cookies y Caché, verás que nada se está almacenando. Nada se está guardando. Recarga la página y vuelve a empezar.',
   HELP_Sec_Desc_8:        'Si no te encuentras cómodo utilizando esta herramienta, no la utilices bajo ningún concepto. Hemos creado esta herramienta como una manera útil para que la gente pueda generar carteras y hacer transacciones sin tener que utilizar la línea de comandos o ejecutar un nodo completo. De nuevo, por favor contáctanos si tienes inquietudes y responderemos lo más pronto posible. ¡Gracias! ',
