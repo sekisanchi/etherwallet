@@ -5,16 +5,16 @@ ja.code = 'ja';
 ja.data = {
 
   /* Mnemonic Additions */
-  MNEM_1:               'Please select the address you would like to interact with.',
-  MNEM_2:               'Your single HD mnemonic phrase can access a number of wallets / addresses. Please select the address you would like to interact with at this time.',
-  MNEM_more:            'More Addresses',
-  MNEM_prev:            'Previous Addresses',
-  x_Mnemonic:           'Mnemonic Phrase (MetaMask / Jaxx / Ledger)',
-  ADD_Radio_5:          'Paste/Type Your Mnemonic',
-  SEND_custom:          'Custom Token',
-  ERROR_21:             ' is not a valid ERC-20 token. If other tokens are loading, please remove this token and try again.',
-  TOKEN_show:           'Show All Tokens',
-  TOKEN_hide:           'Hide Tokens',
+  MNEM_1:               '操作したいアドレスを選んでください。',
+  MNEM_2:               'ひとつのHDニーモニックで、複数のお財布やアドレスを操作できます。操作したいアドレス（お財布）を選んでください。',
+  MNEM_more:            '他のアドレス',
+  MNEM_prev:            '前のアドレス',
+  x_Mnemonic:           'ニーモニックフレーズ (MetaMask / Jaxx / Ledger)',
+  ADD_Radio_5:          'ニーモニックを入力,またはペーストしてください',
+  SEND_custom:          'カスタムトークン',
+  ERROR_21:             'は正しいERC-20ではありません。もし他のトークンをロード中でしたら、これを取り除いてからもう一度お試しください。',
+  TOKEN_show:           '全てのトークンを表示',
+  TOKEN_hide:           'トークンを隠す',
 
   /* Geth Error Messages */
   GETH_InvalidSender:      '送出元が無効です',
@@ -282,14 +282,14 @@ ja.data = {
   SUCCESS_6:            '選択されました： ',
 
   /* Parity Error Messages */
-  PARITY_AlreadyImported:       "Transaction with the same hash was already imported.",
-  PARITY_Old:                   "Transaction nonce is too low. Try incrementing the nonce.",
-  PARITY_TooCheapToReplace:     "Transaction fee is too low. There is another transaction with same nonce in the queue. Try increasing the fee or incrementing the nonce.",
-  PARITY_LimitReached:          "There are too many transactions in the queue. Your transaction was dropped due to limit. Try increasing the fee.",
-  PARITY_InsufficientGasPrice:  "Transaction fee is too low. It does not satisfy your node's minimal fee (minimal: {}, got: {}). Try increasing the fee.",
-  PARITY_InsufficientBalance:   "Insufficient funds. Account you try to send transaction from does not have enough funds. Required {} and got: {}.",
-  PARITY_GasLimitExceeded:      "Transaction cost exceeds current gas limit. Limit: {}, got: {}. Try decreasing supplied gas.",
-  PARITY_InvalidGasLimit:       "Supplied gas is beyond limit.",
+  PARITY_AlreadyImported:       "同じハッシュ値のトランザクションが既にインポートされています。",
+  PARITY_Old:                   "トランザクションnonceが小さすぎます。増やしてみてください。",
+  PARITY_TooCheapToReplace:     "トランザクション料金(fee)が低すぎます。同じnonce値のトランザクションが待ち行列の中にあります。料金を増やすか、nonceを大きくしてください。",
+  PARITY_LimitReached:          "待ち行列に処理しきれないほどたくさんのトランザクションが入っています。最大制限値を超えましたので、そのトランザクションは除外されました。料金(fee)を増やして再度お試しください。",
+  PARITY_InsufficientGasPrice:  "トランザクション料金(fee)が低すぎます。最低要件を満たしていません。 (minimal: {}, got: {}). 料金(fee)を増やして再度お試しください。",
+  PARITY_InsufficientBalance:   "残高不足です。トランザクションを送出しようとした口座に十分な残高がありません。 必要な値 {} に対して、現在値：{} です。",
+  PARITY_GasLimitExceeded:      "必要なトランザクションコストがガスリミットを超えました。 リミット値: {}, 現在値: {}. ガス供給量を減らして再度お試しください。",
+  PARITY_InvalidGasLimit:       "ガス供給値が制限値を超えました。",
 
   /* Tranlsation Info */
   translate_version:    '0.3',
