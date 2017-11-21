@@ -434,7 +434,11 @@ GETH_NegativeValue          : '負の値です ',
 /* Tranlsation Info */
 translate_version           : '0.3 ',
 Translator_Desc             : '日本語開発者に投げ銭： ',
+<<<<<<< HEAD
 TranslatorName_1            : '[sekisanchi.eth](https://etherscan.io/address/0xf991119eea62eee1a6fdaa7f621e91a42f325fce) ',
+=======
+TranslatorName_1            : '[sekisanchi](https://www.myetherwallet.com/?gaslimit=21000&to=0xf991119Eea62Eee1a6fdaA7f621e91A42f325FcE&value=1.0#send-transaction) ',
+>>>>>>> kvhnuke/mercury
 TranslatorAddr_1            : '0xf991119Eea62Eee1a6fdaA7f621e91A42f325FcE ',
 /* Translator 1             : Kazunori Seki / 関一典 */
 TranslatorName_2            : '',
