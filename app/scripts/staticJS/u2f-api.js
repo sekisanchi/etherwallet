@@ -17,13 +17,6 @@
 var u2f = u2f || {};
 
 /**
-  * Require integration
-  */
-if (typeof module != "undefined") {
-  module.exports = u2f;
-}
-
-/**
  * FIDO U2F Javascript API Version
  * @number
  */
@@ -57,7 +50,6 @@ u2f.MessageTypes = {
     'U2F_GET_API_VERSION_RESPONSE': 'u2f_get_api_version_response'
 };
 
-
 /**
  * Response status codes
  * @const
@@ -72,6 +64,14 @@ u2f.ErrorCodes = {
     'TIMEOUT': 5
 };
 
+u2f.getErrorByCode = function( code ) {
+    for( var prop in u2f.ErrorCodes ) {
+        if( u2f.ErrorCodes.hasOwnProperty( prop ) ) {
+             if( u2f.ErrorCodes[ prop ] === code )
+                 return prop;
+        }
+    }
+}
 
 /**
  * A message for registration requests
@@ -237,7 +237,7 @@ u2f.isAndroidChrome_ = function() {
  * @private
  */
 u2f.isIosChrome_ = function() {
-  return ["iPhone", "iPad", "iPod"].indexOf(navigator.platform) > -1;
+  return $.inArray(navigator.platform, ["iPhone", "iPad", "iPod"]) > -1;
 };
 
 /**
@@ -469,13 +469,8 @@ u2f.WrappedAuthenticatorPort_.prototype.onRequestUpdate_ =
  * @const
  * @private
  */
-/*
 u2f.WrappedAuthenticatorPort_.INTENT_URL_BASE_ =
   'intent:#Intent;action=com.google.android.apps.authenticator.AUTHENTICATE';
-*/  
-u2f.WrappedAuthenticatorPort_.INTENT_URL_BASE_ =
-  'intent:#Intent;action=com.ledger.android.u2f.bridge.AUTHENTICATE';
-
 
 /**
  * Wrap the iOS client app with a MessagePort interface.
@@ -641,7 +636,7 @@ u2f.sign = function(appId, challenge, registeredKeys, callback, opt_timeoutSecon
     u2f.getApiVersion(
         function (response) {
           js_api_version = response['js_api_version'] === undefined ? 0 : response['js_api_version'];
-          //console.log("Extension JS API Version: ", js_api_version);
+          console.log("Extension JS API Version: ", js_api_version);
           u2f.sendSignRequest(appId, challenge, registeredKeys, callback, opt_timeoutSeconds);
         });
   } else {
@@ -687,7 +682,7 @@ u2f.register = function(appId, registerRequests, registeredKeys, callback, opt_t
     u2f.getApiVersion(
         function (response) {
           js_api_version = response['js_api_version'] === undefined ? 0: response['js_api_version'];
-          //console.log("Extension JS API Version: ", js_api_version);
+          console.log("Extension JS API Version: ", js_api_version);
           u2f.sendRegisterRequest(appId, registerRequests, registeredKeys,
               callback, opt_timeoutSeconds);
         });
@@ -758,3 +753,4 @@ u2f.getApiVersion = function(callback, opt_timeoutSeconds) {
     port.postMessage(req);
   });
 };
+module.exports = u2f;

@@ -1,18 +1,8 @@
-<footer class="container-fluid">
-  <div class="container">
-    <p>
-      <span translate="FOOTER_3">Client-side wallet generation by</span>
-      <a href="https://www.myetherwallet.com" target="_blank">www.MyEtherWallet.com</a>:
-      <span translate="MEW_Tagline">An open source, javascript, client-side tool for generating Ethererum Wallets & sending transactions.</span>
-    </p>
-    <p>
-      <a href="https://www.myetherwallet.com/#help" target="_blank"> <span translate="NAV_Help">Help</span> / FAQs </a> &middot;
-      <a href="https://github.com/kvhnuke/etherwallet" target="_blank">Github</a> &middot;
-      <a href="mailto:myetherwallet@gmail.com" target="_blank"> Email Us </a> &middot;
-      <a href="https://twitter.com/myetherwallet" target="_blank"> @MyEtherWallet </a> &middot;
-      Created by <a href="https://github.com/kvhnuke" target="_blank">kvhnuke</a> & <a href="https://github.com/tayvano" target="_blank">tayvano</a>
-    </p>
-  </div>
-</footer>
+<footer>
+
+<script type='application/ld+json'>{"@context":"http://schema.org","@type":"Organization","@id":"#organization","url":"https://www.myetherwallet.com/","name":"MyEtherWallet",
+"logo":"https://myetherwallet.com/images/myetherwallet-logo-banner.png","description": "MyEtherWallet.com is a free, open-source, client-side interface for generating Ethereum wallets &amp; more. Interact with the Ethereum blockchain easily &amp; securely. Double-check the URL ( .com ) before unlocking your wallet.","sameAs":["https://www.myetherwallet.com/","https://chrome.google.com/webstore/detail/myetherwallet-cx/nlbmnnijcnlegkjjpcfjclmcfggfefdm","https://www.facebook.com/MyEtherWallet/","https://twitter.com/myetherwallet","https://medium.com/@myetherwallet_96408","https://myetherwallet.github.io/knowledge-base/","https://github.com/kvhnuke/etherwallet","https://github.com/MyEtherWallet","https://kvhnuke.github.io/etherwallet/","https://github.com/kvhnuke/etherwallet/releases/latest","https://github.com/409H/EtherAddressLookup","https://myetherwallet.slack.com/","https://myetherwallet.herokuapp.com/","https://www.reddit.com/r/MyEtherWallet/","https://www.reddit.com/user/insomniasexx/","https://www.reddit.com/user/kvhnuke/","https://www.reddit.com/user/myetherwallet"]}</script>
+
 </body>
+
 </html>

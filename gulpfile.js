@@ -1,228 +1,414 @@
-// confirmed working on node v4.2.6 & npm v3.7.2
-// if you are still having issues, you may need to install browserify gloablly.
+const fs = require('fs');
 
-var fs = require('fs');
+const autoprefixer = require('gulp-autoprefixer');
+const archiver     = require('archiver');
+const bump         = require('gulp-bump');
+const babelify     = require('babelify');
+const browserify   = require('browserify');
+const buffer       = require('vinyl-buffer');
+const clean        = require('gulp-clean');
+const concat       = require('gulp-concat');
+const cssnano      = require('gulp-cssnano');
+const fileinclude  = require('gulp-file-include');
+const gulp         = require('gulp');
+const less         = require('gulp-less');
+const notify       = require('gulp-notify');
+const plumber      = require('gulp-plumber' );
+const rename       = require('gulp-rename');
+const runSequence  = require('run-sequence');
+const shell        = require('gulp-shell');
+const source       = require('vinyl-source-stream');
+const uglify       = require('gulp-uglify');
+const zip          = require('gulp-zip');
+const html2js      = require('html2js-browserify');
 
-var gulp = require('gulp');
-var less = require('gulp-less');
-var autoprefixer = require('gulp-autoprefixer');
-var cssnano = require('gulp-cssnano');
-var notify = require('gulp-notify');
-var rename = require('gulp-rename');
-var gutil = require('gulp-util');
-var concat = require('gulp-concat');
-var clean = require('gulp-clean');
-var uglify = require('gulp-uglify');
-var shell = require('gulp-shell');
-var fileinclude = require('gulp-file-include');
-var babel = require('gulp-babel');
+const app          = './app/';
+const dist         = './dist/';
+const dist_CX      = './chrome-extension/';
+
+
+// Error / Success Handling
+let onError = function(err) {
+    notify.onError({
+        title: "Error: " + err.plugin,
+        subtitle: "<%= file.relative %>",
+        message: "<%= error.message %>",
+        sound: "Beep",
+        icon: app + "images/icons/icon48.png",
+    })(err);
+    console.log(err.toString());
+    this.emit('end');
+};
+
+function onSuccess(msg) {
+    return {
+        message: msg + " Complete! ",
+        //sound:     "Pop",
+        icon: app + "images/icons/icon48.png",
+        onLast: true
+    }
+}
+
+function notifyFunc(msg) {
+    return gulp.src('.', { read: false })
+        .pipe(notify(onSuccess(msg)))
+}
 
 
 
+// HTML / TPL Pages
+let htmlFiles = app + 'layouts/*.html';
+let tplFiles = app + 'includes/*.tpl';
 
-// Compile and Minify Less / CSS Files
-var lessWatchFolder = './app/styles/less/**/*.less';
-var lessFile = './app/styles/less/etherwallet-master.less';
-var lessOutputFolder = './dist/css';
-var cxLessOutputFolder = './chrome-extension/css';
-var lessOutputFile = 'etherwallet-master.css';
-var lessOutputFileMin = 'etherwallet-master.min.css';
-
-gulp.task('less', function (cb) {
-  return gulp
-    .src(lessFile)
-      .pipe(less({ compress: false })).on('error', notify.onError(function (error) {
-        return "ERROR! Problem file : " + error.message;
-      }))
-      .pipe( autoprefixer({
-        browsers: ['last 3 versions', 'iOS > 7'], remove: false
-      } ) )
-      .pipe(rename(lessOutputFile))
-      //.pipe(gulp.dest(lessOutputFolder)) // unminified css
-      //.pipe(gulp.dest(cxLessOutputFolder)) // unminified css
-      .pipe(cssnano({ autoprefixer: false, safe: true })).on('error', notify.onError(function (error) {
-        return "ERROR! minify CSS Problem file : " + error.message;
-      }))
-      .pipe(rename(lessOutputFileMin))
-      //mew css
-      .pipe(gulp.dest(lessOutputFolder))
-      //cx css
-      .pipe(gulp.dest(cxLessOutputFolder))
-      .pipe(notify('Styles Complete'));
+gulp.task('html', function(done) {
+    return gulp.src(htmlFiles)
+        .pipe(plumber({ errorHandler: onError }))
+        .pipe(fileinclude({ prefix: '@@', basepath: '@file' }))
+        .pipe(gulp.dest(dist))
+        .pipe(gulp.dest(dist_CX))
+        .pipe(notify(onSuccess('HTML')))
 });
 
 
 
+// styles: Compile and Minify Less / CSS Files
+let less_watchFolder = app + 'styles/**/*.less';
+let less_srcFile = app + 'styles/etherwallet-master.less';
+let less_destFolder = dist + 'css';
+let less_destFolder_CX = dist_CX + 'css';
+let less_destFile = 'etherwallet-master.css';
+let less_destFileMin = 'etherwallet-master.min.css';
+
+gulp.task('styles', function() {
+    return gulp.src(less_srcFile)
+        .pipe(plumber({ errorHandler: onError }))
+        .pipe(less({ compress: false }))
+        .pipe(autoprefixer({ browsers: ['last 4 versions', 'iOS > 7'], remove: false }))
+        .pipe(rename(less_destFile))
+        //.pipe( gulp.dest   (  less_destFolder                                         )) // unminified css
+        //.pipe( gulp.dest   (  less_destFolder_CX                                      )) // unminified css
+        .pipe(cssnano({ autoprefixer: false, safe: true }))
+        .pipe(rename(less_destFileMin))
+        .pipe(gulp.dest(less_destFolder))
+        .pipe(gulp.dest(less_destFolder_CX))
+        .pipe(notify(onSuccess('Styles')))
+});
 
 
-// Compile and Minify JS Files
-var jsFiles = "./app/scripts/*.js";
-var AllJsFiles = "./app/scripts/**/*.js";
-var mainjs = "./app/scripts/main.js";
-var staticjsFiles = "./app/scripts/staticJS/*.js";
-var staticjsOutputFile = 'etherwallet-static.min.js';
+// js: Browserify
+let js_watchFolder = app + 'scripts/**/*.{js,json,html}';
+let js_srcFile = app + 'scripts/main.js';
+let js_destFolder = dist + 'js/';
+let js_destFolder_CX = dist_CX + 'js/';
+let js_destFile = 'etherwallet-master.js';
+let browseOpts = { debug: true }; // generates inline source maps - only in js-debug
+let babelOpts = {
+    presets: ['es2015'],
+    compact: false,
+    global: true
+};
 
-gulp.task('staticJS', function () {
-  return gulp
-    .src(staticjsFiles)
-      .pipe(concat(staticjsOutputFile))
-      .pipe(uglify())
-      // mew static
-      .pipe(gulp.dest('./dist/js/'))
-      // mew staticxc
-      .pipe(gulp.dest('./chrome-extension/js/'))
-      .pipe(notify('StaticJS Complete'));
+function bundle_js(bundler) {
+    return bundler.bundle()
+        .pipe(plumber({ errorHandler: onError }))
+        .pipe(source('main.js'))
+        .pipe(buffer())
+        .pipe(rename(js_destFile))
+        .pipe(gulp.dest(js_destFolder))
+        .pipe(gulp.dest(js_destFolder_CX))
+        .pipe(notify(onSuccess('JS')))
+}
+
+function bundle_js_debug(bundler) {
+    return bundler.bundle()
+        .pipe(plumber({ errorHandler: onError }))
+        .pipe(source('main.js'))
+        .pipe(buffer())
+        .pipe(rename(js_destFile))
+        .pipe(gulp.dest(js_destFolder))
+        .pipe(gulp.dest(js_destFolder_CX))
+        .pipe(notify(onSuccess('JS')))
+}
+
+
+gulp.task('js', function() {
+    let bundler = browserify(js_srcFile).transform(babelify).transform(html2js);
+    bundle_js(bundler)
+});
+
+gulp.task('js-production', function() {
+    let bundler = browserify(js_srcFile).transform(babelify, babelOpts).transform(html2js);
+    bundle_js(bundler)
+});
+
+gulp.task('js-debug', function() {
+    let bundler = browserify(js_srcFile, browseOpts).transform(babelify, babelOpts).transform(html2js);
+    bundle_js_debug(bundler)
 });
 
 
 
-// Browserify
-gulp.task('browserify', shell.task([
-  'browserify '+mainjs+' -o dist/js/etherwallet-master.js'
-]));
-gulp.task('cxBrowserify', shell.task([
-  'browserify '+mainjs+' -o chrome-extension/js/etherwallet-master.js'
-]));
+// Rebuild Static JS
+let js_srcFilesStatic = app + 'scripts/staticJS/to-compile-to-static/*.js';
+let js_destFolderStatic = app + 'scripts/staticJS/';
+let js_destFileStatic = 'etherwallet-static.min.js';
 
-
-
-gulp.task('minJS',['browserify'],function () {
-  return gulp
-    .src('./dist/js/etherwallet-master.js')
-      .pipe(babel({ presets: ['es2015'], compact: false }))
-      .pipe(gulp.dest('./dist/js/'))
-      .pipe(notify('MinJS Complete'));
-});
-gulp.task('cxMinJS',['cxBrowserify'],function () {
-  return gulp
-    .src('./chrome-extension/js/etherwallet-master.js')
-      .pipe(babel({ presets: ['es2015'], compact: false}))
-      .pipe(gulp.dest('./chrome-extension/js/'))
-      //.pipe(notify('CX MinJS'));
+gulp.task('staticJS', function() {
+    return gulp.src(js_srcFilesStatic)
+        .pipe(plumber({ errorHandler: onError }))
+        .pipe(concat(js_destFileStatic))
+        .pipe(uglify())
+        .pipe(gulp.dest(js_destFolderStatic))
+        .pipe(notify(onSuccess('StaticJS')))
 });
 
 
 
+// Copy
+let imgSrcFolder = app + 'images/**/*';
+let fontSrcFolder = app + 'fonts/*.*';
+let cxSrcFiles = app + 'includes/browser_action/*.*';
+let jsonFile = app + '*.json';
+let jQueryFile = app + 'scripts/staticJS/jquery-1.12.3.min.js';
+let bin = app + '/bin/*';
+let staticJSSrcFile = js_destFolderStatic + js_destFileStatic;
+let readMe = './README.md';
 
 
+gulp.task('copy', ['staticJS'], function() {
+    gulp.src(imgSrcFolder)
+        .pipe(gulp.dest(dist + 'images'))
+        .pipe(gulp.dest(dist_CX + 'images'));
 
+    gulp.src(fontSrcFolder)
+        .pipe(gulp.dest(dist + 'fonts'))
+        .pipe(gulp.dest(dist_CX + 'fonts'));
 
+    gulp.src(staticJSSrcFile)
+        .pipe(gulp.dest(dist + 'js'))
+        .pipe(gulp.dest(dist_CX + 'js'));
 
+    gulp.src(jQueryFile)
+        .pipe(gulp.dest(dist + 'js'))
+        .pipe(gulp.dest(dist_CX + 'js'));
 
+    gulp.src(jsonFile)
+        .pipe(gulp.dest(dist))
+        .pipe(gulp.dest(dist_CX));
 
-// Copy Images
-var imagesFolder = "./app/images/**/*";
-var imagesOutputFolder = "./dist/images";
-var cxImagesOutputFolder = "./chrome-extension/images";
+    gulp.src(readMe)
+        .pipe(gulp.dest(dist));
 
-gulp.task('copy-images', function() {
-   gulp.src(imagesFolder)
-   .pipe(gulp.dest(imagesOutputFolder))
-   .pipe(notify({message:'MEW Images', onLast:true}))
-   .pipe(gulp.dest(cxImagesOutputFolder))
-   .pipe(notify({message:'CX Images', onLast:true}));
+    gulp.src(bin)
+        .pipe(gulp.dest(dist + 'bin'));
+
+    return gulp.src(cxSrcFiles)
+        .pipe(gulp.dest(dist_CX + 'browser_action'))
+
+    .pipe(notify(onSuccess(' Copy ')))
 });
 
 
-
-
-
-// Copy Fonts
-var fontsFolder = "./app/fonts/*.*";
-var fontsOutputFolder = "./dist/fonts";
-var cxFontsOutputFolder = "./chrome-extension/fonts";
-
-gulp.task('copy-fonts', function() {
-   gulp.src(fontsFolder)
-   .pipe(gulp.dest(fontsOutputFolder))
-   .pipe(notify({message:'MEW Fonts', onLast:true}))
-   .pipe(gulp.dest(cxFontsOutputFolder))
-   .pipe(notify({message:'CX Fonts', onLast:true}));
-});
-
-
-
-
-
-// Copy CX Browser Action Files
-var cxSource = "./app/includes/browser_action/*.*";
-var cxDest = "./chrome-extension/browser_action";
-
-gulp.task('copy-cx', function() {
-   gulp.src( cxSource )
-   .pipe(gulp.dest( cxDest ))
-   .pipe(notify({message:'CX Browser Action Files', onLast:true}))
-});
-
-
-
-
-//html Pages
-var htmlPages = "./app/layouts/*.html";
-var tplFiles = "./app/includes/*.tpl";
-
-gulp.task('buildHTML', function () {
-    gulp.src(htmlPages)
-      .pipe(fileinclude({
-        prefix: '@@',
-        basepath: '@file'
-      }))
-    .pipe(gulp.dest('./dist/'))
-    .pipe(notify({message:'MEW HTML Pages Complete', onLast:true}))
-    .pipe(gulp.dest('./chrome-extension/'))
-    .pipe(notify({message:'CX HTML Pages Complete', onLast:true}));
-});
 
 
 // Clean files that get compiled but shouldn't
-gulp.task('clean1', function () {
-    gulp.src('./chrome-extension/images/fav', {read: false})
-    .pipe(clean())
-});
-gulp.task('clean2', function () {
-    gulp.src('./chrome-extension/embedded.html', {read: false})
-    .pipe(clean())
-});
-gulp.task('clean3', function () {
-    gulp.src('./chrome-extension/index.html', {read: false})
-    .pipe(clean())
-});
-gulp.task('clean4', function () {
-    gulp.src('./dist/cx-wallet.html', {read: false})
-    .pipe(clean())
-});
-
-
-// Watch Tasks
-gulp.task('watchJS', function() {
-  gulp.watch([jsFiles, AllJsFiles],[
-    'browserify',
-    'minJS',
-    'cxBrowserify',
-    'cxMinJS'
-  ]);
-});
-gulp.task('watchLess', function() {
-    gulp.watch(lessWatchFolder, ['less']);
-});
-gulp.task('watchPAGES', function() {
-    gulp.watch(htmlPages, ['buildHTML']);
-});
-gulp.task('watchTPL', function() {
-    gulp.watch(tplFiles, ['buildHTML']);
-});
-gulp.task('watchCX', function() {
-    gulp.watch(cxSource, ['copy-cx']);
+gulp.task('clean', function() {
+    return gulp.src([
+            dist_CX + 'images/fav/manifest.json',
+            dist_CX + 'embedded.html',
+            dist_CX + 'index.html',
+            dist_CX + 'signmsg.html',
+            dist + 'cx-wallet.html',
+            dist + 'images/icons',
+            dist + 'manifest.json',
+            dist_CX + 'package.json'
+        ], { read: false })
+        .pipe(plumber({ errorHandler: onError }))
+        .pipe(clean())
+        .pipe(notify(onSuccess(' Clean ')))
 });
 
 
 
+// Bumps Version Number
+function bumpFunc(t) {
+  return gulp.src([app + '*.json'])
+    .pipe( plumber   ({ errorHandler: onError   }))
+    .pipe( bump      ({ type: t                 }))
+    .pipe( gulp.dest  ( './app'                 ))
+    .pipe( notify     ( onSuccess('Bump ' + t ) ))
+}
 
 
+// Get Version Number
+let versionNum;
+let versionMsg;
+gulp.task('getVersion', function() {
+    manifest = JSON.parse(fs.readFileSync(app + 'manifest.json'));
+    versionNum = 'v' + manifest.version;
+    versionMsg = 'Release: ' + versionNum
+        //return gulp.src( './' )
+        //.pipe( notify ( onSuccess('Version Number ' + versionNum ) ))
+});
 
-gulp.task('build', ['buildHTML','less', 'staticJS', 'browserify', 'minJS', 'copy-images','copy-fonts', 'copy-cx', 'cxBrowserify', 'cxMinJS',]);
-gulp.task('watch', ['watchJS' , 'watchLess', 'watchPAGES', 'watchTPL', 'watchCX']);
 
-gulp.task('clean', ['clean1', 'clean2', 'clean3', 'clean4']);
+// zips dist folder
+gulp.task('zip', ['getVersion'], function() {
+    gulp.src(dist + '**/**/*')
+        .pipe(plumber({ errorHandler: onError }))
+        .pipe(rename(function (path) {
+          path.dirname = './etherwallet-' + versionNum + '/' + path.dirname;
+        }))
+        .pipe(zip('./etherwallet-' + versionNum + '.zip'))
+        .pipe(gulp.dest('./releases/'))
+        .pipe(notify(onSuccess('Zip Dist ' + versionNum)));
+    return gulp.src(dist_CX + '**/**/*')
+        .pipe(plumber({ errorHandler: onError }))
+        .pipe(zip('./chrome-extension-' + versionNum + '.zip'))
+        .pipe(gulp.dest('./releases/'))
+        .pipe(notify(onSuccess('Zip CX ' + versionNum)))
+});
+
+
+function archive() {
+  let outputZip = fs.createWriteStream(__dirname + '/example.zip');
+  let archiveZip = archiver('zip', {
+      gzip: true,
+  });
+  outputZip.on('close', function() {
+    console.log(archiveZip.pointer() + ' total bytes');
+    console.log('archiver has been finalized and the output file descriptor has closed.');
+  });
+  archiveZip.on('error', function(err) {
+    throw err;
+  });
+  archiveZip.pipe(outputZip);
+  archiveZip.directory(dist, 'test2');
+  archiveZip.finalize();
+
+
+  let outputTar = fs.createWriteStream(__dirname + '/example.tgz');
+  let archiveTar = archiver('tar', {
+      gzip: true,
+  });
+  outputTar.on('close', function() {
+    return gulp.src(archiveTar).pipe(onSuccess('Archive Complete: Tar, /dist' ));
+  });
+  archiveTar.on('error', function(err) {
+    throw err;
+  });
+  archiveTar.pipe(outputTar);
+  archiveTar.directory(dist, 'test2');
+  archiveTar.finalize();
+
+}
+
+
+gulp.task('travisZip', ['getVersion'], function() {
+    gulp.src(dist + '**/**/*')
+        .pipe(plumber({ errorHandler: onError }))
+        .pipe(rename(function (path) {
+          path.dirname = './etherwallet-' + versionNum + '/' + path.dirname;
+        }))
+        .pipe(zip('./etherwallet-' + versionNum + '.zip'))
+        .pipe(gulp.dest('./deploy/'))
+        .pipe(notify(onSuccess('Zip Dist ' + versionNum)));
+    return gulp.src(dist_CX + '**/**/*')
+        .pipe(plumber({ errorHandler: onError }))
+        .pipe(zip('./chrome-extension-' + versionNum + '.zip'))
+        .pipe(gulp.dest('./deploy/'))
+        .pipe(notify(onSuccess('Zip CX ' + versionNum)))
+});
+
+
+// add all
+gulp.task('add', function() {
+    return gulp.src('*.js', { read: false })
+        .pipe(shell([
+            'git add -A'
+        ]))
+        //.pipe( notify ( onSuccess('Git Add' ) ))
+});
+
+// commit with current v# in manifest
+gulp.task('commit', ['getVersion'], function() {
+    return gulp.src('*.js', { read: false })
+        .pipe(shell([
+            'git commit -m "Rebuilt and cleaned everything. Done for now."'
+        ]))
+        .pipe(notify(onSuccess('Commit')))
+});
+
+// commit with current v# in manifest
+gulp.task('commitV', ['getVersion'], function() {
+    return gulp.src('*.js', { read: false })
+        .pipe(shell([
+            'git commit -m " ' + versionMsg + ' "'
+        ]))
+        .pipe(notify(onSuccess('Commit w ' + versionMsg)))
+});
+
+// tag with current v# in manifest
+gulp.task('tag', ['getVersion'], function() {
+    return gulp.src('*.js', { read: false })
+        .pipe(shell([
+            'git tag -a ' + versionNum + ' -m " ' + versionMsg + '"'
+        ]))
+        .pipe(notify(onSuccess('Tagged Commit' + versionMsg)))
+});
+
+// Push Release to Mercury
+gulp.task('push', ['getVersion'], function() {
+    return gulp.src('*.js', { read: false })
+        .pipe(shell([
+            'git push origin mercury ' + versionNum
+        ]))
+        .pipe(notify(onSuccess('Push')))
+});
+
+// Push Live
+// Pushes dist folder to gh-pages branch
+gulp.task('pushlive', ['getVersion'], function() {
+    return gulp.src('*.js', { read: false })
+        .pipe(shell([
+            'git subtree push --prefix dist origin gh-pages'
+        ]))
+        .pipe(notify(onSuccess('Push Live')))
+});
+
+// Prep & Release
+// gulp prep
+// gulp bump   or gulp zipit
+// gulp commit
+// git push --tags
+// gulp pushlive ( git subtree push --prefix dist origin gh-pages )
+
+gulp.task('watchJS',      function() { gulp.watch(js_watchFolder,   ['js']            ) })
+gulp.task('watchJSDebug', function() { gulp.watch(js_watchFolder,   ['js-debug']      ) })
+gulp.task('watchJSProd',  function() { gulp.watch(js_watchFolder,   ['js-production'] ) })
+gulp.task('watchLess',    function() { gulp.watch(less_watchFolder, ['styles']        ) })
+gulp.task('watchPAGES',   function() { gulp.watch(htmlFiles,        ['html']          ) })
+gulp.task('watchTPL',     function() { gulp.watch(tplFiles,         ['html']          ) })
+gulp.task('watchCX',      function() { gulp.watch(cxSrcFiles,       ['copy']          ) })
+
+gulp.task('bump',          function() { return bumpFunc( 'patch' ) });
+gulp.task('bump-patch',    function() { return bumpFunc( 'patch' ) });
+gulp.task('bump-minor',    function() { return bumpFunc( 'minor' ) });
+
+gulp.task('archive',       function() { return archive() });
+
+gulp.task('prep',   function(cb) { runSequence('js-production', 'html', 'styles', 'copy', cb); });
+
+gulp.task('bump',   function(cb) { runSequence('bump-patch', 'clean', 'zip', cb);              });
+
+gulp.task('zipit',  function(cb) { runSequence('clean', 'zip', cb);                            });
+
+gulp.task('commit', function(cb) { runSequence('add', 'commitV', 'tag', cb);                   });
+
+gulp.task('watch',     ['watchJS',     'watchLess', 'watchPAGES', 'watchTPL', 'watchCX'])
+gulp.task('watchProd', ['watchJSProd', 'watchLess', 'watchPAGES', 'watchTPL', 'watchCX'])
+
+gulp.task('build', ['js', 'html', 'styles', 'copy']);
+gulp.task('build-debug', ['js-debug', 'html', 'styles', 'watchJSDebug', 'watchLess', 'watchPAGES', 'watchTPL', 'watchCX'])
 
 gulp.task('default', ['build', 'watch']);
