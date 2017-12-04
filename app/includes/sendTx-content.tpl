@@ -5,42 +5,38 @@
   <!-- If unlocked with address only -->
   <article class="block" ng-show="wallet.type=='addressOnly'">
     <div class="row form-group">
-      <h4 translate="SEND_ViewOnly">
+      <h4>
         You cannot send with only your address. You must use one of the other options to unlock your wallet in order to send.
       </h4>
-      <h5 translate="X_HelpfulLinks">
-        Helpful Links &amp; FAQs
+      <h5>
+        Helpful Resources / FAQs
       </h5>
       <ul>
         <li class="u__protip">
           <a href="https://myetherwallet.github.io/knowledge-base/getting-started/accessing-your-new-eth-wallet.html"
              target="_blank"
-             rel="noopener noreferrer"
-             translate="X_HelpfulLinks_1">
+             rel="noopener noreferrer">
                 How to Access your Wallet
           </a>
         </li>
         <li class="u__protip">
           <a href="https://myetherwallet.github.io/knowledge-base/private-keys-passwords/lost-eth-private-key.html"
              target="_blank"
-             rel="noopener noreferrer"
-             translate="X_HelpfulLinks_2">
+             rel="noopener noreferrer">
                 I lost my private key
           </a>
         </li>
         <li class="u__protip">
           <a href="https://myetherwallet.github.io/knowledge-base/private-keys-passwords/accessing-different-address-same-private-key-ether.html"
              target="_blank"
-             rel="noopener noreferrer"
-             translate="X_HelpfulLinks_3">
+             rel="noopener noreferrer">
                 My private key opens a different address
           </a>
         </li>
         <li class="u__protip">
           <a href="https://myetherwallet.github.io/knowledge-base/migration/"
              target="_blank"
-             rel="noopener noreferrer"
-             translate="X_HelpfulLinks_4">
+             rel="noopener noreferrer">
                 Migrating to/from MyEtherWallet
           </a>
         </li>
@@ -64,9 +60,7 @@
     <section class="row form-group">
 
       <div class="col-sm-11">
-        <label translate="SEND_amount">
-          Amount to Send:
-        </label>
+        <label translate="SEND_amount">Amount to Send:</label>
       </div>
 
       <div class="col-sm-11">
@@ -87,10 +81,7 @@
                class="dropdown-toggle"
                ng-click="dropdownAmount = !dropdownAmount"
                ng-class="dropdownEnabled ? '' : 'disabled'">
-                <strong>
-                  {{unitReadable}}
-                  <i class="caret"></i>
-                </strong>
+                <strong> {{unitReadable}}<i class="caret"></i> </strong>
             </a>
 
             <!-- Amount to Send - Dropdown -->
@@ -127,9 +118,7 @@
          ng-click="wallet.setTokens(); globalService.tokensLoaded=true"
          ng-hide="globalService.tokensLoaded">
           <img src="images/icon-load-tokens.svg" width="16" height="16" />
-          <p translate="SEND_LoadTokens">
-            Load Tokens
-          </p>
+          <p> Load Tokens </p>
       </a>
 
       <!-- Amount to Send - Transfer Entire Balance -->
@@ -156,9 +145,7 @@
           <img src="images/icon-help.svg" class="help-icon" />
           <p class="account-help-text" translate="GAS_LIMIT_Desc"></p>
         </a>
-        <label translate="TRANS_gas">
-          Gas Limit:
-        </label>
+        <label translate="TRANS_gas"> Gas Limit: </label>
         <input type="text"
                class="form-control"
                placeholder="21000"
@@ -188,9 +175,7 @@
         <div class="col-sm-11 clearfix" ng-show="tx.sendMode=='ether'">
           <span class="account-help-icon">
             <img src="images/icon-help.svg" class="help-icon" />
-            <p class="account-help-text" translate="OFFLINE_Step2_Label_6b">
-              This is optional.
-            </p>
+            <p class="account-help-text" translate="OFFLINE_Step2_Label_6b">This is optional.</p>
           </span>
 
           <label translate="TRANS_data"> Data: </label>
@@ -218,9 +203,7 @@
             <p class="account-help-text" translate="NONCE_Desc"></p>
           </a>
 
-          <label translate="OFFLINE_Step2_Label_5">
-            Nonce
-          </label>
+          <label translate="OFFLINE_Step2_Label_5"> Nonce </label>
           <input type="text"
                  class="form-control"
                  placeholder="2"
@@ -243,9 +226,7 @@
                 <p class="account-help-text" translate="GAS_PRICE_Desc"></p>
           </a>
 
-          <label translate="OFFLINE_Step2_Label_3">
-            Gas Price:
-          </label>
+          <label translate="OFFLINE_Step2_Label_3"> Gas Price: </label>
           <input type="text"
                  class="form-control"
                  placeholder="50"
@@ -265,16 +246,12 @@
 
     <div class="clearfix form-group">
       <div class="well" ng-show="wallet!=null && customGasMsg!=''">
-        <p>
-          <span translate="SEND_CustomAddrMsg">
-            A message regarding
-          </span>
-          {{tx.to}}
-          <br />
-          <strong>
-            {{customGasMsg}}
-          </strong>
-        </p>
+        <p><small>
+          A message regarding {{tx.to}}
+        </small></p>
+        <p><strong>
+          {{customGasMsg}}
+        </strong></p>
       </div>
     </div>
 
@@ -312,8 +289,7 @@
       <a class="btn btn-primary btn-block col-sm-11"
          data-toggle="modal"
          data-target="#sendTransaction"
-         translate="SEND_trans"
-         ng-click="parseSignedTx( signedTx )">
+         translate="SEND_trans">
              Send Transaction
       </a>
     </div>
@@ -334,11 +310,11 @@
   <div class="block block--danger"
        ng-show="wallet!=null && globalService.currentTab==globalService.tabs.swap.id && !hasEnoughBalance()">
 
-    <h5 translate="SWAP_Warning_1">
+    <h5>
       Warning! You do not have enough funds to complete this swap.
     </h5>
 
-    <p translate="SWAP_Warning_2">
+    <p>
       Please add more funds to your wallet or access a different wallet.
     </p>
 
@@ -349,7 +325,7 @@
   <div ng-show="checkTxPage"
        ng-click="checkTxReadOnly=!checkTxReadOnly"
        class="small text-right text-gray-lighter">
-        <small translate="X_Advanced">
+        <small>
           Advanced Users Only.
         </small>
   </div>
